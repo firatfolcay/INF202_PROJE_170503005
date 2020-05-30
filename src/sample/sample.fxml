@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane alignment="CENTER" hgap="10.0" prefHeight="250.0" prefWidth="500.0" vgap="10.0"
+          xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="sample.Controller">
+    <children>
+        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+            <children>
+                <Button layoutX="0.0" layoutY="14.0" mnemonicParsing="false" prefWidth="185.0" text="Button"/>
+                <Button cancelButton="false" defaultButton="false" disable="false" focusTraversable="true" layoutX="0.0"
+                        layoutY="150.0" mnemonicParsing="false" opacity="1.0" prefWidth="185.0" rotate="0.0"
+                        text="Button" textOverrun="CLIP" visible="true" wrapText="false"/>
+                <Button layoutX="0.0" layoutY="80.0" mnemonicParsing="false" prefWidth="185.0" text="Button"/>
+                <Button layoutX="0.0" layoutY="46.0" mnemonicParsing="false" prefWidth="185.0" text="Button"/>
+                <Button layoutX="0.0" layoutY="115.0" mnemonicParsing="false" onAction="#changeScreenButtonPushed"
+                        prefWidth="185.0" text="Kullanıcı Ayarları"/>
+            </children>
+        </AnchorPane>
+    </children>
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
+    </rowConstraints>
+</GridPane>
