@@ -5,14 +5,15 @@ import java.sql.*;
 public class DB {
     public static void AddUser(User a, Connection conn) {
         try {
-            String query2 = " insert into users (first_name, last_name, is_admin)"
-                    + " values (?, ?, ?)";
+            String query2 = " insert into users (first_name, last_name, is_admin,password)"
+                    + " values (?, ?, ?, ?)";
 
             PreparedStatement preparedStmt2 = conn.prepareStatement(query2);
             preparedStmt2.setString(1, a.getName());
             preparedStmt2.setString(2, a.getSurname());
 
             preparedStmt2.setInt(3, a.getLevel());
+            preparedStmt2.setString(4, a.getPassword());
             preparedStmt2.execute();
         } catch (Exception e) {
             System.err.println("Got an exception!");

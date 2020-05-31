@@ -11,13 +11,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-
-import javafx.scene.control.TableView;
 
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
@@ -44,6 +40,7 @@ public class Controller implements Initializable  {
     @FXML private TextField SurnameTextField;
     @FXML private ChoiceBox LevelChoiceBox;
     @FXML private TextField DeletIDTextField;
+    @FXML private PasswordField PasswordTextField;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
         try{
@@ -63,7 +60,7 @@ public class Controller implements Initializable  {
         try {
             String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
             Connection conn = DriverManager.getConnection(myUrl, "root", "root");
-            String query3 = "SELECT * FROM users";
+            String query3 = "SELECT id,first_name,last_name,is_Admin FROM users";
 
             // create the java statement
             Statement st = conn.createStatement();
@@ -80,7 +77,8 @@ public class Controller implements Initializable  {
                 int isAdmin = rs.getInt("is_Admin");
 
 
-                // print the results
+
+                        // print the results
                 people.add(new User(id,firstName,lastName,isAdmin));
 
             }
@@ -106,9 +104,9 @@ public class Controller implements Initializable  {
         String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
         Connection conn = DriverManager.getConnection(myUrl, "root", "root");
         int i= Integer.parseInt((String)LevelChoiceBox.getValue());
-        User newUser = new User(0,NameTextField.getText(), SurnameTextField.getText(),i);
+        User newUser = new User(0,NameTextField.getText(), SurnameTextField.getText(),i, PasswordTextField.getText());
         DB.AddUser(newUser,conn);
-        tableView.getItems().add(newUser);
+        getUser();
         conn.close();
     }
 

@@ -26,6 +26,7 @@ public class Main extends Application {
         try {
             // create a mysql database connection
             //String myDriver = "com.mysql.jdbc.driver";
+
             String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
             //Class.forName(myDriver);
              Connection conn = DriverManager.getConnection(myUrl, "root", "root");
@@ -43,6 +44,7 @@ public class Main extends Application {
                     "  last_name varchar(32) not null,\n" +
 
                     "  is_admin int,\n" +
+                    "  password varchar(32) not null,\n"+
                     "  primary key (id)\n" +
                     ");";
 
