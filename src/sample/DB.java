@@ -19,6 +19,11 @@ public class DB {
             System.err.println(e.getMessage());
         }
     }
+    public static void AddReport(){
+
+
+
+    }
 
 
     /*public static void ShowUsers() {

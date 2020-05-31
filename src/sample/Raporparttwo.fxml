@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.*?>
+
+<GridPane alignment="CENTER" hgap="10.0" prefHeight="500.0" prefWidth="1000.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="sample.Controller">
+  <children>
+    <AnchorPane prefHeight="200.0" prefWidth="200.0">
+      <children>
+        <ImageView fitHeight="585.5625" fitWidth="1041.0" layoutX="-32.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+          <image>
+            <Image url="@icons/greybg.png" />
+          </image>
+        </ImageView>
+        <TextField layoutX="400.0" layoutY="235.0" prefWidth="200.0" />
+        <TextField layoutX="400.0" layoutY="303.0" prefWidth="200.0" />
+        <TextField layoutX="400.0" layoutY="173.0" prefWidth="200.0" />
+        <TextField layoutX="400.0" layoutY="374.0" prefWidth="200.0" />
+        <TextField layoutX="400.0" layoutY="437.0" prefWidth="200.0" />
+        <Label layoutX="400.0" layoutY="147.0" text="Muayne Prosedürü" textFill="WHITE">
+          <font>
+            <Font size="13.0" fx:id="x1" />
+          </font>
+        </Label>
+        <Label font="$x1" layoutX="400.0" layoutY="208.0" text="Muayne Kapsamı" textFill="WHITE" />
+        <Label font="$x1" layoutX="400.0" layoutY="405.0" text="Muayne Aşaması" textFill="WHITE" />
+        <Label font="$x1" layoutX="400.0" layoutY="272.0" text="Resim No" textFill="WHITE" />
+        <Label font="$x1" layoutX="400.0" layoutY="339.0" text="Yüzey Durumu" textFill="WHITE" />
+        <Label layoutX="400.0" layoutY="66.0" minHeight="22.0" prefHeight="33.0" prefWidth="144.0" text="Genel Bilgiler" textFill="WHITE">
+          <font>
+            <Font size="20.0" />
+          </font>
+        </Label>
+        <Button layoutX="533.0" layoutY="489.0" mnemonicParsing="false" prefWidth="67.0" text="İleri" />
+        <Button layoutX="400.0" layoutY="489.0" mnemonicParsing="false" prefWidth="67.0" text="Geri" />
+        <Label font="$x1" layoutX="479.0" layoutY="489.0" text="Sayfa 2" textFill="WHITE" />
+      </children>
+    </AnchorPane>
+  </children>
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+</GridPane>
