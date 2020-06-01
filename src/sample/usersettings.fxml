@@ -57,15 +57,15 @@
           <content>
             <AnchorPane prefHeight="288.0" prefWidth="534.0">
               <children>
-                <ImageView fitHeight="601.5000610351562" fitWidth="1069.3333910771125" layoutX="-7.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="601.5000610351562" fitWidth="1069.3333910771125" layoutX="-3.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true">
                   <image>
                     <Image url="@icons/greybg.png" />
                   </image>
                 </ImageView>
-                <Button cancelButton="false" defaultButton="false" disable="false" focusTraversable="true" layoutX="331.0" layoutY="337.0" mnemonicParsing="false" onAction="#newUserButtonPushed" opacity="1.0" prefWidth="123.0" rotate="0.0" text="Yeni Kullanıcı Ekle" textOverrun="CLIP" visible="true" wrapText="false" />
+                <Button cancelButton="false" defaultButton="false" disable="false" focusTraversable="true" layoutX="471.0" layoutY="337.0" mnemonicParsing="false" onAction="#updateUserButtonPushed" opacity="1.0" prefWidth="114.0" rotate="0.0" text="Düzenle" textOverrun="CLIP" visible="true" wrapText="false" />
                 <Button layoutX="491.0" layoutY="439.0" mnemonicParsing="false" onAction="#changeScreenToMainMenu" prefWidth="82.0" text="Geri" />
                 <Button cancelButton="false" defaultButton="false" layoutX="513.0" layoutY="379.0" mnemonicParsing="false" onAction="#DeletUserButtonPushed" prefWidth="82.0" text="Kullanıcı Sil" underline="false" wrapText="false" />
-                <TableView fx:id="tableView" layoutX="331.0" layoutY="105.0" prefHeight="138.0" prefWidth="394.0">
+                <TableView fx:id="tableView" layoutX="331.0" layoutY="105.0" onMouseClicked="#selectUser" prefHeight="138.0" prefWidth="394.0">
                   <columns>
                     <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="100.0" text="ID" fx:id="ID" />
                     <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="100.0" text="Ad" fx:id="NameColumn" />
@@ -73,8 +73,13 @@
                     <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="100.0" text="Seviye" fx:id="Level" />
                   </columns>
                 </TableView>
-                <TextField id="NameTextField" alignment="CENTER_LEFT" layoutX="331.0" layoutY="261.0" prefWidth="114.0" promptText="Ad" text="" />
-                <ChoiceBox id="LevelChoiceBox" disable="false" focusTraversable="true" layoutX="475.0" layoutY="261.0" pickOnBounds="false" prefWidth="114.0" visible="true">
+                <TextField id="NameTextField" fx:id="UpdateNameTextField" alignment="CENTER_LEFT" layoutX="331.0" layoutY="261.0" prefWidth="114.0" promptText="Ad" text="" />
+                <TextField id="SurnameTextField" fx:id="UpdateSurnameTextField" alignment="CENTER_LEFT" layoutX="331.0" layoutY="301.0" prefWidth="114.0" promptText="Soyad" text="" />
+                <TextField fx:id="DeletIDTextField" layoutX="331.0" layoutY="378.0" prefWidth="160.0" promptText="Kullanıcı Silmek için ID girin" />
+                <Label font="$x2" layoutX="429.0" layoutY="29.0" text="Kullanıcı Düzenle / Sil" textFill="WHITE" />
+                <PasswordField id="PasswordTextField" fx:id="UpdatePasswordField" layoutX="471.0" layoutY="301.0" prefWidth="114.0" promptText="Şifre" />
+                <TextField fx:id="IdUpdateTextField" editable="true" layoutX="331.0" layoutY="337.0" prefWidth="114.0" promptText="ID" />
+                <ComboBox fx:id="UpdateLevelChoiceBox" layoutX="471.0" layoutY="261.0" prefHeight="21.0" prefWidth="114.0">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="1" />
@@ -82,11 +87,7 @@
                       <String fx:value="3" />
                     </FXCollections>
                   </items>
-                </ChoiceBox>
-                <TextField id="SurnameTextField" alignment="CENTER_LEFT" layoutX="331.0" layoutY="301.0" prefWidth="114.0" promptText="Soyad" text="" />
-                <TextField fx:id="DeletIDTextField" layoutX="331.0" layoutY="378.0" prefWidth="160.0" promptText="Kullanıcı Silmek için ID girin" />
-                <Label font="$x2" layoutX="429.0" layoutY="29.0" text="Kullanıcı Ekle / Düzenle" textFill="WHITE" />
-                <PasswordField id="PasswordTextField" layoutX="475.0" layoutY="301.0" prefWidth="114.0" promptText="Şifre" />
+                </ComboBox>
               </children>
             </AnchorPane>
           </content>

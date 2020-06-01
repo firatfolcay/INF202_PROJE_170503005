@@ -20,10 +20,25 @@ public class DB {
             System.err.println(e.getMessage());
         }
     }
-    public static void AddReport(){
+    public static void UpdateUser(User a, Connection conn){
+        try {
+            System.out.println("Açıldım");
+            String query2 = " update users set first_name= ?, last_name=?, is_admin= ?, password=? where id= ?";
+            PreparedStatement preparedStmt2 = conn.prepareStatement(query2);
+            preparedStmt2.setString(1, a.getName());
+            preparedStmt2.setString(2, a.getSurname());
 
+            preparedStmt2.setInt(3, a.getLevel());
+            preparedStmt2.setString(4, a.getPassword());
+            preparedStmt2.setInt(5, a.getID());
 
-
+            preparedStmt2.execute();
+            System.out.println("EXECUTELADIM");
+        }
+        catch (Exception e) {
+            System.err.println("Got an exception!");
+            System.err.println(e.getMessage());
+        }
     }
 
 
