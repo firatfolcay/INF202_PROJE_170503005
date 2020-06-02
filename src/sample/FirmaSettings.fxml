@@ -57,7 +57,7 @@
                     <Image url="@icons/greybg.png" />
                   </image>
                 </ImageView>
-                <TableView fx:id="tableViewFirma" layoutX="275.0" layoutY="64.0" prefHeight="185.0" prefWidth="450.0">
+                <TableView fx:id="tableViewFirma" layoutX="275.0" layoutY="64.0" onMouseClicked="#selectFirma" prefHeight="185.0" prefWidth="450.0">
                   <columns>
                     <TableColumn prefWidth="75.0" text="Firma ID" fx:id="Firma_IDColumn" />
                     <TableColumn prefWidth="75.0" text="Firma Adı" fx:id="Firma_NameColumn" />
@@ -68,11 +68,11 @@
                   </columns>
                 </TableView>
                 <Label font="$x2" layoutX="437.0" layoutY="28.0" text="Firma Düzenle" textFill="WHITE" />
-                <TextField layoutX="74.0" layoutY="269.0" prefWidth="200.0" />
-                <TextField layoutX="74.0" layoutY="304.0" prefWidth="200.0" />
-                <TextField layoutX="74.0" layoutY="338.0" prefWidth="200.0" />
-                <TextField layoutX="74.0" layoutY="378.0" prefWidth="200.0" />
-                <TextField layoutX="74.0" layoutY="414.0" prefWidth="200.0" />
+                <TextField fx:id="FirmaAdiUpdateTextField" layoutX="74.0" layoutY="269.0" prefWidth="200.0" />
+                <TextField fx:id="IlUpdateTextField" layoutX="74.0" layoutY="304.0" prefWidth="200.0" />
+                <TextField fx:id="IlceUpdateTextField" layoutX="74.0" layoutY="338.0" prefWidth="200.0" />
+                <TextField fx:id="JobOrderNoUpdateTextField" layoutX="74.0" layoutY="378.0" prefWidth="200.0" />
+                <TextField fx:id="TeklifNoUpdateTextField" layoutX="74.0" layoutY="414.0" prefWidth="200.0" />
                 <Label layoutX="127.0" layoutY="221.0" prefWidth="95.0" text="Düzenle / Sil" textFill="WHITE">
                   <font>
                     <Font size="15.0" />
@@ -83,9 +83,11 @@
                 <Label font="$x1" layoutX="14.0" layoutY="416.0" text="Teklif No" textFill="WHITE" />
                 <Label font="$x1" layoutX="14.0" layoutY="342.0" text="İlçe" textFill="WHITE" />
                 <Label font="$x1" layoutX="14.0" layoutY="380.0" text="İş Emri No" textFill="WHITE" />
-                <Button layoutX="304.0" layoutY="377.0" mnemonicParsing="false" text="Güncelle" />
-                <Button layoutX="304.0" layoutY="413.0" mnemonicParsing="false" prefWidth="66.0" text="Sil" />
-                <Button layoutX="467.0" layoutY="415.0" mnemonicParsing="false" onAction="#changeScreenToMainMenu" prefWidth="66.0" text="Geri" />
+                <Button layoutX="318.0" layoutY="415.0" mnemonicParsing="false" onAction="#updateFirmaButtonPushed" text="Güncelle" />
+                <Button layoutX="478.0" layoutY="269.0" mnemonicParsing="false" onAction="#DeleteFirmaButtonPushed" prefWidth="66.0" text="Sil" />
+                <Button layoutX="467.0" layoutY="416.0" mnemonicParsing="false" onAction="#changeScreenToMainMenu" prefWidth="66.0" text="Geri" />
+                <TextField fx:id="DeletFirmaIdTextField" layoutX="351.0" layoutY="269.0" prefWidth="95.0" />
+                <Label font="$x1" layoutX="294.0" layoutY="270.0" text="Firma ID" textFill="WHITE" />
               </children>
             </AnchorPane>
           </content>

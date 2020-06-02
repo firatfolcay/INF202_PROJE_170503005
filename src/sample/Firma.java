@@ -16,6 +16,16 @@ public class Firma {
 
 
     }
+    public Firma(String Firma_Name, String Il,String Ilce, String JobOrder_No, String Offer_No){
+
+        this.Firma_Name = new SimpleStringProperty(Firma_Name);
+        this.Il = new SimpleStringProperty(Il);
+        this.Ilce = new SimpleStringProperty(Ilce);
+        this.JobOrder_No=new SimpleStringProperty(JobOrder_No);
+        this.Offer_No=new SimpleStringProperty(Offer_No);
+
+
+    }
 
     public String getFirma_Name() {
         return Firma_Name.get();

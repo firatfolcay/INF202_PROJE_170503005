@@ -23,7 +23,7 @@ import java.util.ResourceBundle;
 
 
 public class Controller implements Initializable {
-    public static int SceneName=0;
+    public static int SceneName = 0;
     //table view variables
     @FXML
     private TableView<User> tableView;
@@ -70,6 +70,19 @@ public class Controller implements Initializable {
     private TextField TeklifNoTextField;
     @FXML
     private TextField JobOrderNoTextField;
+    @FXML
+    private TextField DeletFirmaIdTextField;
+    @FXML
+    private TextField FirmaAdiUpdateTextField;
+    @FXML
+    private TextField IlUpdateTextField;
+    @FXML
+    private TextField IlceUpdateTextField;
+    @FXML
+    private TextField TeklifNoUpdateTextField;
+    @FXML
+    private TextField JobOrderNoUpdateTextField;
+
     //tableview Firma
     @FXML
     private TableView<Firma> tableViewFirma;
@@ -89,21 +102,24 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        try {if(SceneName==2){setFirmaTableView();}
-        else if(SceneName==1){setuserTableView();}
-        else{
-            System.out.println(SceneName+":Sahne no");
-            System.out.println("bu da bir şeydir");
-        }
+        try {
+            if (SceneName == 2) {
+                setFirmaTableView();
+            } else if (SceneName == 1) {
+                setuserTableView();
+            } else {
 
 
+            }
+            System.out.println("Sahne no: " + SceneName);
 
 
         } catch (Exception a) {
             System.out.println(a);
         }
     }
-    public void setuserTableView () throws Exception{
+
+    public void setuserTableView() throws Exception {
         NameColumn.setCellValueFactory(new PropertyValueFactory<User, String>("Name"));
 
         SurnameColumn.setCellValueFactory(new PropertyValueFactory<User, String>("Surname"));
@@ -112,26 +128,30 @@ public class Controller implements Initializable {
 
         Level.setCellValueFactory(new PropertyValueFactory<User, Integer>("Level"));
 
-        tableView.setItems(getUser());}
-        public void setFirmaTableView()throws Exception{
-            Firma_IDColumn.setCellValueFactory(new PropertyValueFactory<Firma, Integer>("Firma_ID"));
-            Firma_NameColumn.setCellValueFactory(new PropertyValueFactory<Firma, String>("Firma_Name"));
-            Firma_IlColumn.setCellValueFactory(new PropertyValueFactory<Firma, String>("Il"));
-            Firma_IlceColumn.setCellValueFactory(new PropertyValueFactory<Firma, String>("Ilce"));
-            Firma_IsEmriNoColumn.setCellValueFactory(new PropertyValueFactory<Firma, String>("JobOrder_No"));
-            Firma_TeklifNoColumn.setCellValueFactory(new PropertyValueFactory<Firma, String>("Offer_No"));
-            tableViewFirma.setItems(getFirma());
-        }
+        tableView.setItems(getUser());
+    }
+
+    public void setFirmaTableView() throws Exception {
+        Firma_IDColumn.setCellValueFactory(new PropertyValueFactory<Firma, Integer>("Firma_ID"));
+        Firma_NameColumn.setCellValueFactory(new PropertyValueFactory<Firma, String>("Firma_Name"));
+        Firma_IlColumn.setCellValueFactory(new PropertyValueFactory<Firma, String>("Il"));
+        Firma_IlceColumn.setCellValueFactory(new PropertyValueFactory<Firma, String>("Ilce"));
+        Firma_IsEmriNoColumn.setCellValueFactory(new PropertyValueFactory<Firma, String>("JobOrder_No"));
+        Firma_TeklifNoColumn.setCellValueFactory(new PropertyValueFactory<Firma, String>("Offer_No"));
+        tableViewFirma.setItems(getFirma());
+    }
 
     public void refreshTableview() throws Exception {
 
         tableView.setItems(getUser());
     }
-    public void refreshFirmaTableview() throws Exception{
+
+    public void refreshFirmaTableview() throws Exception {
 
         tableViewFirma.setItems(getFirma());
     }
-    public ObservableList<Firma> getFirma() throws Exception{
+
+    public ObservableList<Firma> getFirma() throws Exception {
         String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
         Connection conn = DriverManager.getConnection(myUrl, "root", "root");
 
@@ -160,18 +180,15 @@ public class Controller implements Initializable {
         // create the mysql insert preparedstatement
 
 
-
         // execute the preparedstatement
         return firmas;
 
     }
 
 
+    // public void ObservableList<Firma> getFirma() throws Exception {
 
-
-   // public void ObservableList<Firma> getFirma() throws Exception {
-
-       // return firmas;
+    // return firmas;
 
     //}
 
@@ -217,7 +234,10 @@ public class Controller implements Initializable {
     }
     // select user from table
 
-    public void selectUser() throws Exception {
+    public void selectUser()  {
+        try {
+
+
         User SelectedUser = tableView.getSelectionModel().getSelectedItem();
         String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
         Connection conn = DriverManager.getConnection(myUrl, "root", "root");
@@ -247,9 +267,52 @@ public class Controller implements Initializable {
 
         }
         st.close();
-        conn.close();
+        conn.close();}
+        catch (Exception e){
+
+        }
 
 
+    }
+
+    public void selectFirma() throws Exception {
+        try{
+        Firma SelectedFirma = tableViewFirma.getSelectionModel().getSelectedItem();
+        String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
+        Connection conn = DriverManager.getConnection(myUrl, "root", "root");
+        String query3 = "SELECT * FROM firmalar WHERE id=" + SelectedFirma.getFirma_ID();
+        // create the java statement
+        Statement st = conn.createStatement();
+
+        // execute the query, and get a java resultset
+        ResultSet rs = st.executeQuery(query3);
+
+        // iterate through the java resultset
+        while (rs.next()) {
+            int id = rs.getInt("id");
+
+
+            DeletFirmaIdTextField.setText("" + id);
+            String firmaName = rs.getString("firma_name");
+            FirmaAdiUpdateTextField.setText(firmaName);
+
+            String lastName = rs.getString("firma_Il");
+            IlUpdateTextField.setText(lastName);
+
+            String firma_Ilce = rs.getString("firma_Ilce");
+            IlceUpdateTextField.setText(firma_Ilce);
+            String firma_joborderno = rs.getString("firma_JobOrderNo");
+            JobOrderNoUpdateTextField.setText(firma_joborderno);
+
+            String firma_OfferNo = rs.getString("firma_OfferNo");
+            TeklifNoUpdateTextField.setText(firma_OfferNo);
+
+        }
+        st.close();
+        conn.close();}
+        catch (Exception e){
+
+        }
     }
 
     //Update User
@@ -272,6 +335,24 @@ public class Controller implements Initializable {
 
     }
 
+    //Update Firma
+    public void updateFirmaButtonPushed() throws Exception {
+        String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
+        Connection conn = DriverManager.getConnection(myUrl, "root", "root");
+        int b = Integer.parseInt(DeletFirmaIdTextField.getText());
+
+
+
+
+
+        Firma newFirma = new Firma(FirmaAdiUpdateTextField.getText(), IlUpdateTextField.getText(), IlceUpdateTextField.getText(), JobOrderNoUpdateTextField.getText(), TeklifNoUpdateTextField.getText(),b);
+
+        DB.UpdateFirma(newFirma, conn);
+
+        conn.close();
+        refreshFirmaTableview();
+    }
+
     // Add New user
 
     public void newUserButtonPushed() throws Exception {
@@ -286,12 +367,12 @@ public class Controller implements Initializable {
         refreshTableview();
     }
 
-    public void newFirmaButtonPushed() throws Exception{
+    public void newFirmaButtonPushed() throws Exception {
         String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
         Connection conn = DriverManager.getConnection(myUrl, "root", "root");
 
 
-        Firma newFirma = new Firma( FirmaAdiTextField.getText(), IlTextField.getText(), IlceTextField.getText(), JobOrderNoTextField.getText(),TeklifNoTextField.getText(),0);
+        Firma newFirma = new Firma(FirmaAdiTextField.getText(), IlTextField.getText(), IlceTextField.getText(), JobOrderNoTextField.getText(), TeklifNoTextField.getText(), 0);
         System.out.println("NEW firma actim");
         DB.AddFirma(newFirma, conn);
         System.out.println("Db ye ekledim");
@@ -336,13 +417,10 @@ public class Controller implements Initializable {
         System.out.println(SceneName);
 
 
-
-
-
     }
 
     public void changeScreenToMainMenu(ActionEvent event) throws Exception {
-        SceneName=0;
+        SceneName = 0;
         Parent UserSettingsParent = FXMLLoader.load(getClass().getResource("sample.fxml"));
         Scene UserSettingsScene = new Scene(UserSettingsParent);
 
@@ -366,6 +444,20 @@ public class Controller implements Initializable {
         conn.close();
         refreshTableview();
 
+    }
+
+    public void DeleteFirmaButtonPushed() throws Exception {
+        String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
+        Connection conn = DriverManager.getConnection(myUrl, "root", "root");
+        String query = "delete from firmalar where id = ?";
+        PreparedStatement preparedStmt = conn.prepareStatement(query);
+        int i = Integer.parseInt(DeletFirmaIdTextField.getText());
+        preparedStmt.setInt(1, i);
+        preparedStmt.execute();
+
+
+        conn.close();
+        refreshFirmaTableview();
     }
 
 }

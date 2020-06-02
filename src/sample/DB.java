@@ -9,21 +9,49 @@ public class DB {
                     + " values (?, ?, ?, ?, ?)";
 
             PreparedStatement preparedStmt2 = conn.prepareStatement(query2);
-            System.out.println("1");
+
             preparedStmt2.setString(1, a.getFirma_Name());
-            System.out.println("1");
+
             preparedStmt2.setString(2, a.getIl());
-            System.out.println("1");
+
 
             preparedStmt2.setString(3, a.getIlce());
-            System.out.println("1");
+
             preparedStmt2.setString(4, a.getOffer_No());
-            System.out.println("1");
+
             preparedStmt2.setString(5, a.getJobOrder_No());
-            System.out.println("1");
+
 
             preparedStmt2.execute();
         } catch (Exception e) {
+            System.err.println("Got an exception!");
+            System.err.println(e.getMessage());
+        }
+    }
+
+    public static void UpdateFirma(Firma a, Connection conn) {
+        try {
+            String query2 = " update firmalar set firma_name=?, firma_Il=?, firma_Ilce=?,firma_OfferNo=?,firma_JobOrderNo=? where id=?";
+
+
+
+        PreparedStatement preparedStmt2 = conn.prepareStatement(query2);
+
+        preparedStmt2.setString(1, a.getFirma_Name());
+
+        preparedStmt2.setString(2, a.getIl());
+
+
+        preparedStmt2.setString(3, a.getIlce());
+
+        preparedStmt2.setString(4, a.getOffer_No());
+
+        preparedStmt2.setString(5, a.getJobOrder_No());
+        preparedStmt2.setInt(6,a.getFirma_ID());
+
+
+        preparedStmt2.execute();}
+        catch (Exception e){
             System.err.println("Got an exception!");
             System.err.println(e.getMessage());
         }
