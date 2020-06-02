@@ -59,6 +59,19 @@ public class Main extends Application {
 
             // execute the preparedstatement
             preparedStmt.execute();
+
+            String query2 = "create table if not exists firmalar  (\n" +
+                    "  id int unsigned auto_increment not null,\n" +
+                    "  firma_name varchar(32) not null,\n" +
+                    "  firma_Il varchar(32) not null,\n" +
+
+                    "  firma_Ilce varchar(32),\n" +
+                    "  firma_OfferNo varchar(32) not null,\n" +
+                    "  firma_JobOrderNo varchar(32) not null,\n" +
+                    "  primary key (id)\n" +
+                    ");";
+            PreparedStatement preparedStmt2 = conn.prepareStatement(query2);
+            preparedStmt2.execute();
             //user ekleme
 /*
             String query2 = " insert into users (first_name, last_name, is_admin)"

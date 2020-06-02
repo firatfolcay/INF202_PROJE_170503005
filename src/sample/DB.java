@@ -3,6 +3,32 @@ package sample;
 import java.sql.*;
 
 public class DB {
+    public static void AddFirma(Firma a, Connection conn) {
+        try {
+            String query2 = " insert into firmalar (firma_name, firma_Il, firma_Ilce,firma_OfferNo,firma_JobOrderNo)"
+                    + " values (?, ?, ?, ?, ?)";
+
+            PreparedStatement preparedStmt2 = conn.prepareStatement(query2);
+            System.out.println("1");
+            preparedStmt2.setString(1, a.getFirma_Name());
+            System.out.println("1");
+            preparedStmt2.setString(2, a.getIl());
+            System.out.println("1");
+
+            preparedStmt2.setString(3, a.getIlce());
+            System.out.println("1");
+            preparedStmt2.setString(4, a.getOffer_No());
+            System.out.println("1");
+            preparedStmt2.setString(5, a.getJobOrder_No());
+            System.out.println("1");
+
+            preparedStmt2.execute();
+        } catch (Exception e) {
+            System.err.println("Got an exception!");
+            System.err.println(e.getMessage());
+        }
+    }
+
     public static void AddUser(User a, Connection conn) {
         try {
             String query2 = " insert into users (first_name, last_name, is_admin,password)"
@@ -20,7 +46,8 @@ public class DB {
             System.err.println(e.getMessage());
         }
     }
-    public static void UpdateUser(User a, Connection conn){
+
+    public static void UpdateUser(User a, Connection conn) {
         try {
             System.out.println("Açıldım");
             String query2 = " update users set first_name= ?, last_name=?, is_admin= ?, password=? where id= ?";
@@ -34,8 +61,7 @@ public class DB {
 
             preparedStmt2.execute();
             System.out.println("EXECUTELADIM");
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.err.println("Got an exception!");
             System.err.println(e.getMessage());
         }

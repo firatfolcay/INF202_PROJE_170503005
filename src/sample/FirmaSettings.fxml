@@ -23,11 +23,11 @@
                     <Image url="@icons/greybg.png" />
                   </image>
                 </ImageView>
-                <TextField layoutX="397.0" layoutY="175.0" prefWidth="200.0" />
-                <TextField layoutX="397.0" layoutY="243.0" prefWidth="200.0" />
-                <TextField layoutX="397.0" layoutY="113.0" prefWidth="200.0" />
-                <TextField layoutX="397.0" layoutY="314.0" prefWidth="200.0" />
-                <TextField layoutX="397.0" layoutY="377.0" prefWidth="200.0" />
+                <TextField fx:id="IlTextField" layoutX="397.0" layoutY="175.0" prefWidth="200.0" />
+                <TextField fx:id="IlceTextField" layoutX="397.0" layoutY="243.0" prefWidth="200.0" />
+                <TextField fx:id="FirmaAdiTextField" layoutX="397.0" layoutY="113.0" prefWidth="200.0" />
+                <TextField fx:id="JobOrderNoTextField" layoutX="397.0" layoutY="314.0" prefWidth="200.0" />
+                <TextField fx:id="TeklifNoTextField" layoutX="397.0" layoutY="377.0" prefWidth="200.0" />
                 <Label layoutX="397.0" layoutY="87.0" text="Firma Adı" textFill="WHITE">
                   <font>
                     <Font size="13.0" fx:id="x1" />
@@ -42,7 +42,8 @@
                     <Font size="20.0" fx:id="x2" />
                   </font>
                 </Label>
-                <Button layoutX="464.0" layoutY="424.0" mnemonicParsing="false" prefWidth="67.0" text="Ekle" />
+                <Button layoutX="530.0" layoutY="424.0" mnemonicParsing="false" onAction="#newFirmaButtonPushed" prefWidth="67.0" text="Ekle" />
+                <Button layoutX="397.0" layoutY="425.0" mnemonicParsing="false" onAction="#changeScreenToMainMenu" prefWidth="59.0" text="Geri" />
               </children>
             </AnchorPane>
           </content>
@@ -56,13 +57,14 @@
                     <Image url="@icons/greybg.png" />
                   </image>
                 </ImageView>
-                <TableView layoutX="274.0" layoutY="64.0" prefHeight="185.0" prefWidth="453.0">
+                <TableView fx:id="tableViewFirma" layoutX="275.0" layoutY="64.0" prefHeight="185.0" prefWidth="450.0">
                   <columns>
-                    <TableColumn prefWidth="75.0" text="Firma Adı" />
-                    <TableColumn prefWidth="75.0" text="İl" />
-                    <TableColumn prefWidth="75.0" text="İlçe" />
-                    <TableColumn prefWidth="75.0" text="İş Emri No" />
-                    <TableColumn prefWidth="75.0" text="Teklif No" />
+                    <TableColumn prefWidth="75.0" text="Firma ID" fx:id="Firma_IDColumn" />
+                    <TableColumn prefWidth="75.0" text="Firma Adı" fx:id="Firma_NameColumn" />
+                    <TableColumn prefWidth="75.0" text="İl" fx:id="Firma_IlColumn" />
+                    <TableColumn prefWidth="75.0" text="İlçe" fx:id="Firma_IlceColumn" />
+                    <TableColumn prefWidth="75.0" text="İş Emri No" fx:id="Firma_IsEmriNoColumn" />
+                    <TableColumn editable="true" prefWidth="75.0" sortable="true" text="Teklif No" fx:id="Firma_TeklifNoColumn" />
                   </columns>
                 </TableView>
                 <Label font="$x2" layoutX="437.0" layoutY="28.0" text="Firma Düzenle" textFill="WHITE" />
@@ -83,6 +85,7 @@
                 <Label font="$x1" layoutX="14.0" layoutY="380.0" text="İş Emri No" textFill="WHITE" />
                 <Button layoutX="304.0" layoutY="377.0" mnemonicParsing="false" text="Güncelle" />
                 <Button layoutX="304.0" layoutY="413.0" mnemonicParsing="false" prefWidth="66.0" text="Sil" />
+                <Button layoutX="467.0" layoutY="415.0" mnemonicParsing="false" onAction="#changeScreenToMainMenu" prefWidth="66.0" text="Geri" />
               </children>
             </AnchorPane>
           </content>
