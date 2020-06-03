@@ -99,6 +99,56 @@ public class Controller implements Initializable {
     @FXML
     private TableColumn<Firma, String> Firma_TeklifNoColumn;
 
+    //Equipment
+
+    //tableview Equipment---------------
+    @FXML
+    private TableView<Equipment> tableViewCihaz;
+    @FXML
+    private TableColumn<Equipment, Integer> Cihaz_IDColumn;
+    @FXML
+    private TableColumn<Equipment, String> Cihaz_NameColumn;
+    @FXML
+    private TableColumn<Equipment, Integer> Cihaz_KutupMesafeColumn;
+    @FXML
+    private TableColumn<Equipment, String> Cihaz_MpOrtamColumn;
+    @FXML
+    private TableColumn<Equipment, String> Cihaz_MagnetikColumn;
+    @FXML
+    private TableColumn<Equipment, String> Cihaz_UVColumn;
+    @FXML
+    private TableColumn<Equipment, String> Cihaz_LightMesafesi;
+    //Equipment---------------------------------
+    @FXML
+    private TextField CihazAdiTextField;
+    @FXML
+    private TextField KutupMesafesiTextField;
+    @FXML
+    private TextField MPTasiyiciOrtamTextField;
+    @FXML
+    private TextField MiknatislamaTeknikTextField;
+    @FXML
+    private TextField IsikMesafesiTextField;
+    @FXML
+    private TextField UVTextField;
+    @FXML
+    private TextField UpdateCihazAdiTextField;
+    @FXML
+    private TextField UpdateKutupMesafesiTextField;
+    @FXML
+    private TextField UpdateMPTasiyiciOrtamTextField;
+    @FXML
+    private TextField UpdateMiknatislamaTeknikTextField;
+    @FXML
+    private TextField UpdateIsikMesafesiTextField;
+    @FXML
+    private TextField UpdateUVTextField;
+    @FXML
+    private TextField DeleteCihazIDTextField;
+    @FXML
+    private TextField UpdateCihazIDTextField;
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -107,8 +157,10 @@ public class Controller implements Initializable {
                 setFirmaTableView();
             } else if (SceneName == 1) {
                 setuserTableView();
-            } else {
-
+            } else if (SceneName ==3) {
+                System.out.println("setliom");
+                    setCihazTableView();
+                System.out.println("setledim be gari");
 
             }
             System.out.println("Sahne no: " + SceneName);
@@ -130,6 +182,20 @@ public class Controller implements Initializable {
 
         tableView.setItems(getUser());
     }
+    public void setCihazTableView() throws Exception{
+        Cihaz_NameColumn.setCellValueFactory(new PropertyValueFactory<Equipment, String>("Cihaz"));
+
+        Cihaz_IDColumn.setCellValueFactory(new PropertyValueFactory<Equipment, Integer>("Cihaz_ID"));
+
+        Cihaz_KutupMesafeColumn.setCellValueFactory(new PropertyValueFactory<Equipment, Integer>("KutupMesafesi"));
+
+        Cihaz_MagnetikColumn.setCellValueFactory(new PropertyValueFactory<Equipment, String>("MagnetTeknik"));
+        Cihaz_UVColumn.setCellValueFactory(new PropertyValueFactory<Equipment, String>("UV"));
+        Cihaz_LightMesafesi.setCellValueFactory(new PropertyValueFactory<Equipment, String>("LightMesafesi"));
+        Cihaz_MpOrtamColumn.setCellValueFactory(new PropertyValueFactory<Equipment, String>("MpOrtam"));
+
+        tableViewCihaz.setItems(getEquipment());
+    }
 
     public void setFirmaTableView() throws Exception {
         Firma_IDColumn.setCellValueFactory(new PropertyValueFactory<Firma, Integer>("Firma_ID"));
@@ -141,6 +207,7 @@ public class Controller implements Initializable {
         tableViewFirma.setItems(getFirma());
     }
 
+
     public void refreshTableview() throws Exception {
 
         tableView.setItems(getUser());
@@ -150,6 +217,11 @@ public class Controller implements Initializable {
 
         tableViewFirma.setItems(getFirma());
     }
+    public void refreshCihazTableview() throws Exception {
+
+        tableViewCihaz.setItems(getEquipment());
+    }
+
 
     public ObservableList<Firma> getFirma() throws Exception {
         String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
@@ -191,7 +263,43 @@ public class Controller implements Initializable {
     // return firmas;
 
     //}
+    public ObservableList<Equipment> getEquipment() throws Exception{
+        ObservableList<Equipment> cihazlar =FXCollections.observableArrayList();
+        String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
+        Connection conn = DriverManager.getConnection(myUrl, "root", "root");
+        String query3 = "SELECT * FROM cihazlar";
 
+        // create the java statement
+        Statement st = conn.createStatement();
+
+        // execute the query, and get a java resultset
+        ResultSet rs = st.executeQuery(query3);
+
+        // iterate through the java resultset
+        cihazlar.removeAll(cihazlar);
+        while (rs.next()) {
+            int id = rs.getInt("id");
+            String cihaz_name = rs.getString("cihaz_name");
+            int kutup_mesafesi = rs.getInt("kutup_mesafesi");
+
+            String mp_ortam = rs.getString("mp_ortam");
+            String magnet_teknik = rs.getString("magnet_teknik");
+            String uv = rs.getString("uv");
+            String light_mesafesi = rs.getString("light_mesafesi");
+
+
+            // print the results
+            cihazlar.add(new Equipment(id, kutup_mesafesi, cihaz_name, mp_ortam,magnet_teknik,uv,light_mesafesi));
+
+
+        }
+
+        st.close();
+        conn.close();
+        return cihazlar;
+
+
+    }
     public ObservableList<User> getUser() throws Exception {
         ObservableList<User> people = FXCollections.observableArrayList();
         try {
@@ -253,7 +361,7 @@ public class Controller implements Initializable {
             int id = rs.getInt("id");
 
             IdUpdateTextField.setText("" + id);
-            DeletIDTextField.setText("" + id);
+            DeleteCihazIDTextField.setText("" + id);
             String firstName = rs.getString("first_name");
             UpdateNameTextField.setText(firstName);
 
@@ -273,6 +381,44 @@ public class Controller implements Initializable {
         }
 
 
+    }
+    public void selectCihaz() throws Exception{
+        try{
+        Equipment SelectedEquipment = tableViewCihaz.getSelectionModel().getSelectedItem();
+        String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
+        Connection conn = DriverManager.getConnection(myUrl, "root", "root");
+        String query3 = "SELECT * FROM cihazlar WHERE id=" + SelectedEquipment.getCihaz_ID();
+        // create the java statement
+        Statement st = conn.createStatement();
+
+        // execute the query, and get a java resultset
+        ResultSet rs = st.executeQuery(query3);
+        while (rs.next()) {
+            int id = rs.getInt("id");
+
+            UpdateCihazIDTextField.setText(""+id);
+            DeleteCihazIDTextField.setText("" + id);
+            String firmaName = rs.getString("cihaz_name");
+            UpdateCihazAdiTextField.setText(firmaName);
+
+            int kutup_mesafesi=rs.getInt("kutup_mesafesi");
+            UpdateKutupMesafesiTextField.setText(""+kutup_mesafesi);
+            String mp_ortam = rs.getString("mp_ortam");
+            UpdateMPTasiyiciOrtamTextField.setText(mp_ortam);
+
+
+            String magnet_teknik = rs.getString("magnet_teknik");
+            UpdateMiknatislamaTeknikTextField.setText(magnet_teknik);
+            String uv = rs.getString("uv");
+            UpdateUVTextField.setText(uv);
+
+
+            String light_mesafesi = rs.getString("light_mesafesi");
+            UpdateIsikMesafesiTextField.setText(light_mesafesi);
+
+        }
+        st.close();
+        conn.close();}catch (Exception e){}
     }
 
     public void selectFirma() throws Exception {
@@ -314,7 +460,23 @@ public class Controller implements Initializable {
 
         }
     }
+//Update Equipment
+    public void updateCihazButtonPushed()throws Exception{
+        String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
+        Connection conn = DriverManager.getConnection(myUrl, "root", "root");
 
+        ;
+
+        int i = Integer.parseInt(UpdateCihazIDTextField.getText());
+        int b = Integer.parseInt(UpdateKutupMesafesiTextField.getText());
+
+        Equipment newCihaz = new Equipment(i, b,UpdateCihazAdiTextField.getText(), UpdateMPTasiyiciOrtamTextField.getText(), UpdateMiknatislamaTeknikTextField.getText(), UpdateUVTextField.getText(),UpdateIsikMesafesiTextField.getText());
+
+        DB.UpdateCihaz(newCihaz, conn);
+
+        conn.close();
+        refreshCihazTableview();
+    }
     //Update User
     public void updateUserButtonPushed() throws Exception {
         System.out.println("Çalışıom");
@@ -331,7 +493,7 @@ public class Controller implements Initializable {
         DB.UpdateUser(newUser, conn);
 
         conn.close();
-        refreshTableview();
+        refreshCihazTableview();
 
     }
 
@@ -365,6 +527,17 @@ public class Controller implements Initializable {
 
         conn.close();
         refreshTableview();
+    }
+    public void newCihazButtonPushed() throws Exception {
+        String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
+        Connection conn = DriverManager.getConnection(myUrl, "root", "root");
+        int b= Integer.parseInt(KutupMesafesiTextField.getText());
+        Equipment newCihaz = new Equipment(0,b, CihazAdiTextField.getText(),MPTasiyiciOrtamTextField.getText(),MiknatislamaTeknikTextField.getText(),UVTextField.getText(),IsikMesafesiTextField.getText());
+        DB.AddCihaz(newCihaz, conn);
+
+
+        conn.close();
+        refreshCihazTableview();
     }
 
     public void newFirmaButtonPushed() throws Exception {
@@ -418,6 +591,19 @@ public class Controller implements Initializable {
 
 
     }
+    public void changeScreenToCihazButtonPushed(ActionEvent event) throws Exception{
+        SceneName = 3;
+        Parent UserSettingsParent = FXMLLoader.load(getClass().getResource("CihazSettings.fxml"));
+        Scene UserSettingsScene2 = new Scene(UserSettingsParent, 1000, 500);
+
+        //Sahne ayarları
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        System.out.println("hata yok");
+        window.setScene(UserSettingsScene2);
+        System.out.println("aha hata buldum");
+
+        window.show();
+    }
 
     public void changeScreenToMainMenu(ActionEvent event) throws Exception {
         SceneName = 0;
@@ -444,6 +630,19 @@ public class Controller implements Initializable {
         conn.close();
         refreshTableview();
 
+    }
+    public void DeleteCihazButtonPushed() throws Exception{
+        String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
+        Connection conn = DriverManager.getConnection(myUrl, "root", "root");
+        String query = "delete from cihazlar where id = ?";
+        PreparedStatement preparedStmt = conn.prepareStatement(query);
+            int i = Integer.parseInt(DeleteCihazIDTextField.getText());
+        preparedStmt.setInt(1, i);
+        preparedStmt.execute();
+
+
+        conn.close();
+        refreshCihazTableview();
     }
 
     public void DeleteFirmaButtonPushed() throws Exception {

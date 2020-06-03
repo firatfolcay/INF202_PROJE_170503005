@@ -1,8 +1,58 @@
 package sample;
 
+import com.mysql.cj.util.DnsSrv;
+
 import java.sql.*;
 
 public class DB {
+    public static void AddCihaz(Equipment a,Connection conn){
+        try{
+            String query2="insert into cihazlar(cihaz_name,kutup_mesafesi,mp_ortam,magnet_teknik,uv,light_mesafesi)"
+                    + "values (?,?,?,?,?,?)";
+            PreparedStatement preparedStmt2 = conn.prepareStatement(query2);
+
+            preparedStmt2.setString(1, a.getCihaz());
+
+            preparedStmt2.setInt(2, a.getKutupMesafesi());
+
+
+            preparedStmt2.setString(3, a.getMpOrtam());
+
+            preparedStmt2.setString(4, a.getMagnetTeknik());
+
+            preparedStmt2.setString(5, a.getUV());
+            preparedStmt2.setString(6, a.getLightMesafesi());
+
+
+
+
+            preparedStmt2.execute();
+        }
+        catch (Exception e){}
+    }
+
+    public static void UpdateCihaz(Equipment a,Connection conn)throws Exception{
+        String query2="update cihazlar set cihaz_name=?,kutup_mesafesi=?,mp_ortam=?,magnet_teknik=?,uv=?,light_mesafesi=? where id=?";
+        PreparedStatement preparedStmt2 = conn.prepareStatement(query2);
+
+        preparedStmt2.setString(1, a.getCihaz());
+
+        preparedStmt2.setInt(2, a.getKutupMesafesi());
+
+
+        preparedStmt2.setString(3, a.getMpOrtam());
+
+        preparedStmt2.setString(4, a.getMagnetTeknik());
+
+        preparedStmt2.setString(5, a.getUV());
+        preparedStmt2.setString(6, a.getLightMesafesi());
+        preparedStmt2.setInt(7,a.getCihaz_ID());
+
+
+
+
+        preparedStmt2.execute();
+    }
     public static void AddFirma(Firma a, Connection conn) {
         try {
             String query2 = " insert into firmalar (firma_name, firma_Il, firma_Ilce,firma_OfferNo,firma_JobOrderNo)"

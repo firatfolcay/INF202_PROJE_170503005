@@ -43,6 +43,7 @@ public class Main extends Application {
             // the mysql insert statement
             //String query = " insert into users (first_name, last_name, date_created, is_admin, num_points)"
             //      + " values (?, ?, ?, ?, ?)";
+            //USER DB----------------------------------------
             String query = "create table if not exists users  (\n" +
                     "  id int unsigned auto_increment not null,\n" +
                     "  first_name varchar(32) not null,\n" +
@@ -58,6 +59,7 @@ public class Main extends Application {
 
 
             // execute the preparedstatement
+            // Firma DB--------------------------
             preparedStmt.execute();
 
             String query2 = "create table if not exists firmalar  (\n" +
@@ -72,6 +74,20 @@ public class Main extends Application {
                     ");";
             PreparedStatement preparedStmt2 = conn.prepareStatement(query2);
             preparedStmt2.execute();
+            //CihazDB---------------------------------------------------
+
+            String query3 = "create table if not exists cihazlar  (\n" +
+                    "  id int unsigned auto_increment not null,\n" +
+                    "  cihaz_name varchar(32) not null,\n" +
+                    "  kutup_mesafesi int,\n" +
+                    "  mp_ortam varchar(32),\n" +
+                    "  magnet_teknik varchar(32) not null,\n" +
+                    "  uv varchar(32) not null,\n" +
+                    "  light_mesafesi varchar(32) not null,\n" +
+                    "  primary key (id)\n" +
+                    ");";
+            PreparedStatement preparedStmt3 = conn.prepareStatement(query3);
+            preparedStmt3.execute();
             //user ekleme
 /*
             String query2 = " insert into users (first_name, last_name, is_admin)"
