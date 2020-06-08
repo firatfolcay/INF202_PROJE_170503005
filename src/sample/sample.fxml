@@ -19,7 +19,7 @@
             <Image url="@icons/greybg.png" />
           </image>
         </ImageView>
-        <Button layoutX="365.0" layoutY="167.0" mnemonicParsing="false" prefWidth="270.0" text="Manyetik Parçacık Muayne Raporu Oluştur" />
+        <Button layoutX="365.0" layoutY="167.0" mnemonicParsing="false" onAction="#changeScreenToRapor" prefWidth="270.0" text="Manyetik Parçacık Muayne Raporu Oluştur" />
         <Button cancelButton="false" defaultButton="false" disable="false" focusTraversable="true" layoutX="365.0" layoutY="277.0" mnemonicParsing="false" onAction="#changeScreenToCihazButtonPushed" opacity="1.0" prefWidth="270.0" rotate="0.0" text="Ekipman Ayarları" textOverrun="CLIP" visible="true" wrapText="false" />
         <Button cancelButton="false" defaultButton="false" layoutX="365.0" layoutY="315.0" mnemonicParsing="false" prefWidth="270.0" text="Çıkış Yap" wrapText="false" />
         <Button layoutX="365.0" layoutY="239.0" mnemonicParsing="false" onAction="#changeScreenToFirmaButtonPushed" prefWidth="270.0" text="Firma Ayarları" />

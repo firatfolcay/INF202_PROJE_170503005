@@ -148,6 +148,39 @@ public class Controller implements Initializable {
     @FXML
     private TextField UpdateCihazIDTextField;
 
+    //RAPOR SIDE---------------------------------
+    //  Genel bilgiler -----------------------
+    @FXML
+    private ChoiceBox RaporCustomerName;
+    @FXML
+    private TextField RaporProjeAdi;
+    @FXML
+    private TextField RaporTestYeri;
+    @FXML
+    private TextField RaporMuayneStand;
+    @FXML
+    private TextField RaporDegerlenStand;
+    @FXML
+    private TextField RaporMuaynePros;
+    @FXML
+    private TextField RaporMuayneKapsam;
+    @FXML
+    private TextField RaporResimNo;
+    @FXML
+    private TextField RaporYuzeyDurum;
+    @FXML
+    private TextField RaporMuayneAsama;
+    @FXML
+    private TextField RaporSayfaNo;
+    @FXML
+    private TextField RaporRaporNo;
+    @FXML
+    private TextField RaporRaporTarihi;
+    @FXML
+    private TextField RaporIsEmriNo;
+    @FXML
+    private TextField RaporTeklifNo;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -157,11 +190,13 @@ public class Controller implements Initializable {
                 setFirmaTableView();
             } else if (SceneName == 1) {
                 setuserTableView();
-            } else if (SceneName ==3) {
+            } else if (SceneName == 3) {
                 System.out.println("setliom");
-                    setCihazTableView();
+                setCihazTableView();
                 System.out.println("setledim be gari");
 
+            } else if (SceneName == 4) {
+                System.out.println("Rapor Sayfası Açıldı");
             }
             System.out.println("Sahne no: " + SceneName);
 
@@ -182,7 +217,8 @@ public class Controller implements Initializable {
 
         tableView.setItems(getUser());
     }
-    public void setCihazTableView() throws Exception{
+
+    public void setCihazTableView() throws Exception {
         Cihaz_NameColumn.setCellValueFactory(new PropertyValueFactory<Equipment, String>("Cihaz"));
 
         Cihaz_IDColumn.setCellValueFactory(new PropertyValueFactory<Equipment, Integer>("Cihaz_ID"));
@@ -217,6 +253,7 @@ public class Controller implements Initializable {
 
         tableViewFirma.setItems(getFirma());
     }
+
     public void refreshCihazTableview() throws Exception {
 
         tableViewCihaz.setItems(getEquipment());
@@ -263,8 +300,8 @@ public class Controller implements Initializable {
     // return firmas;
 
     //}
-    public ObservableList<Equipment> getEquipment() throws Exception{
-        ObservableList<Equipment> cihazlar =FXCollections.observableArrayList();
+    public ObservableList<Equipment> getEquipment() throws Exception {
+        ObservableList<Equipment> cihazlar = FXCollections.observableArrayList();
         String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
         Connection conn = DriverManager.getConnection(myUrl, "root", "root");
         String query3 = "SELECT * FROM cihazlar";
@@ -289,7 +326,7 @@ public class Controller implements Initializable {
 
 
             // print the results
-            cihazlar.add(new Equipment(id, kutup_mesafesi, cihaz_name, mp_ortam,magnet_teknik,uv,light_mesafesi));
+            cihazlar.add(new Equipment(id, kutup_mesafesi, cihaz_name, mp_ortam, magnet_teknik, uv, light_mesafesi));
 
 
         }
@@ -300,6 +337,7 @@ public class Controller implements Initializable {
 
 
     }
+
     public ObservableList<User> getUser() throws Exception {
         ObservableList<User> people = FXCollections.observableArrayList();
         try {
@@ -342,126 +380,130 @@ public class Controller implements Initializable {
     }
     // select user from table
 
-    public void selectUser()  {
+    public void selectUser() {
         try {
 
 
-        User SelectedUser = tableView.getSelectionModel().getSelectedItem();
-        String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
-        Connection conn = DriverManager.getConnection(myUrl, "root", "root");
-        String query3 = "SELECT * FROM users WHERE id=" + SelectedUser.getID();
-        // create the java statement
-        Statement st = conn.createStatement();
+            User SelectedUser = tableView.getSelectionModel().getSelectedItem();
+            String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
+            Connection conn = DriverManager.getConnection(myUrl, "root", "root");
+            String query3 = "SELECT * FROM users WHERE id=" + SelectedUser.getID();
+            // create the java statement
+            Statement st = conn.createStatement();
 
-        // execute the query, and get a java resultset
-        ResultSet rs = st.executeQuery(query3);
+            // execute the query, and get a java resultset
+            ResultSet rs = st.executeQuery(query3);
 
-        // iterate through the java resultset
-        while (rs.next()) {
-            int id = rs.getInt("id");
+            // iterate through the java resultset
+            while (rs.next()) {
+                int id = rs.getInt("id");
 
-            IdUpdateTextField.setText("" + id);
-            DeleteCihazIDTextField.setText("" + id);
-            String firstName = rs.getString("first_name");
-            UpdateNameTextField.setText(firstName);
+                IdUpdateTextField.setText("" + id);
+                DeleteCihazIDTextField.setText("" + id);
+                String firstName = rs.getString("first_name");
+                UpdateNameTextField.setText(firstName);
 
-            String lastName = rs.getString("last_name");
-            UpdateSurnameTextField.setText(lastName);
+                String lastName = rs.getString("last_name");
+                UpdateSurnameTextField.setText(lastName);
 
-            int isAdmin = rs.getInt("is_Admin");
-            UpdateLevelChoiceBox.setValue(isAdmin);
-            String password = rs.getString("password");
-            UpdatePasswordField.setText(password);
+                int isAdmin = rs.getInt("is_Admin");
+                UpdateLevelChoiceBox.setValue(isAdmin);
+                String password = rs.getString("password");
+                UpdatePasswordField.setText(password);
 
-        }
-        st.close();
-        conn.close();}
-        catch (Exception e){
+            }
+            st.close();
+            conn.close();
+        } catch (Exception e) {
 
         }
 
 
     }
-    public void selectCihaz() throws Exception{
-        try{
-        Equipment SelectedEquipment = tableViewCihaz.getSelectionModel().getSelectedItem();
-        String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
-        Connection conn = DriverManager.getConnection(myUrl, "root", "root");
-        String query3 = "SELECT * FROM cihazlar WHERE id=" + SelectedEquipment.getCihaz_ID();
-        // create the java statement
-        Statement st = conn.createStatement();
 
-        // execute the query, and get a java resultset
-        ResultSet rs = st.executeQuery(query3);
-        while (rs.next()) {
-            int id = rs.getInt("id");
+    public void selectCihaz() throws Exception {
+        try {
+            Equipment SelectedEquipment = tableViewCihaz.getSelectionModel().getSelectedItem();
+            String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
+            Connection conn = DriverManager.getConnection(myUrl, "root", "root");
+            String query3 = "SELECT * FROM cihazlar WHERE id=" + SelectedEquipment.getCihaz_ID();
+            // create the java statement
+            Statement st = conn.createStatement();
 
-            UpdateCihazIDTextField.setText(""+id);
-            DeleteCihazIDTextField.setText("" + id);
-            String firmaName = rs.getString("cihaz_name");
-            UpdateCihazAdiTextField.setText(firmaName);
+            // execute the query, and get a java resultset
+            ResultSet rs = st.executeQuery(query3);
+            while (rs.next()) {
+                int id = rs.getInt("id");
 
-            int kutup_mesafesi=rs.getInt("kutup_mesafesi");
-            UpdateKutupMesafesiTextField.setText(""+kutup_mesafesi);
-            String mp_ortam = rs.getString("mp_ortam");
-            UpdateMPTasiyiciOrtamTextField.setText(mp_ortam);
+                UpdateCihazIDTextField.setText("" + id);
+                DeleteCihazIDTextField.setText("" + id);
+                String firmaName = rs.getString("cihaz_name");
+                UpdateCihazAdiTextField.setText(firmaName);
 
-
-            String magnet_teknik = rs.getString("magnet_teknik");
-            UpdateMiknatislamaTeknikTextField.setText(magnet_teknik);
-            String uv = rs.getString("uv");
-            UpdateUVTextField.setText(uv);
+                int kutup_mesafesi = rs.getInt("kutup_mesafesi");
+                UpdateKutupMesafesiTextField.setText("" + kutup_mesafesi);
+                String mp_ortam = rs.getString("mp_ortam");
+                UpdateMPTasiyiciOrtamTextField.setText(mp_ortam);
 
 
-            String light_mesafesi = rs.getString("light_mesafesi");
-            UpdateIsikMesafesiTextField.setText(light_mesafesi);
+                String magnet_teknik = rs.getString("magnet_teknik");
+                UpdateMiknatislamaTeknikTextField.setText(magnet_teknik);
+                String uv = rs.getString("uv");
+                UpdateUVTextField.setText(uv);
 
+
+                String light_mesafesi = rs.getString("light_mesafesi");
+                UpdateIsikMesafesiTextField.setText(light_mesafesi);
+
+            }
+            st.close();
+            conn.close();
+        } catch (Exception e) {
         }
-        st.close();
-        conn.close();}catch (Exception e){}
     }
 
     public void selectFirma() throws Exception {
-        try{
-        Firma SelectedFirma = tableViewFirma.getSelectionModel().getSelectedItem();
-        String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
-        Connection conn = DriverManager.getConnection(myUrl, "root", "root");
-        String query3 = "SELECT * FROM firmalar WHERE id=" + SelectedFirma.getFirma_ID();
-        // create the java statement
-        Statement st = conn.createStatement();
+        try {
+            Firma SelectedFirma = tableViewFirma.getSelectionModel().getSelectedItem();
+            String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
+            Connection conn = DriverManager.getConnection(myUrl, "root", "root");
+            String query3 = "SELECT * FROM firmalar WHERE id=" + SelectedFirma.getFirma_ID();
+            // create the java statement
+            Statement st = conn.createStatement();
 
-        // execute the query, and get a java resultset
-        ResultSet rs = st.executeQuery(query3);
+            // execute the query, and get a java resultset
+            ResultSet rs = st.executeQuery(query3);
 
-        // iterate through the java resultset
-        while (rs.next()) {
-            int id = rs.getInt("id");
+            // iterate through the java resultset
+            while (rs.next()) {
+                int id = rs.getInt("id");
 
 
-            DeletFirmaIdTextField.setText("" + id);
-            String firmaName = rs.getString("firma_name");
-            FirmaAdiUpdateTextField.setText(firmaName);
+                DeletFirmaIdTextField.setText("" + id);
+                String firmaName = rs.getString("firma_name");
+                FirmaAdiUpdateTextField.setText(firmaName);
 
-            String lastName = rs.getString("firma_Il");
-            IlUpdateTextField.setText(lastName);
+                String lastName = rs.getString("firma_Il");
+                IlUpdateTextField.setText(lastName);
 
-            String firma_Ilce = rs.getString("firma_Ilce");
-            IlceUpdateTextField.setText(firma_Ilce);
-            String firma_joborderno = rs.getString("firma_JobOrderNo");
-            JobOrderNoUpdateTextField.setText(firma_joborderno);
+                String firma_Ilce = rs.getString("firma_Ilce");
+                IlceUpdateTextField.setText(firma_Ilce);
+                String firma_joborderno = rs.getString("firma_JobOrderNo");
+                JobOrderNoUpdateTextField.setText(firma_joborderno);
 
-            String firma_OfferNo = rs.getString("firma_OfferNo");
-            TeklifNoUpdateTextField.setText(firma_OfferNo);
+                String firma_OfferNo = rs.getString("firma_OfferNo");
+                TeklifNoUpdateTextField.setText(firma_OfferNo);
 
-        }
-        st.close();
-        conn.close();}
-        catch (Exception e){
+            }
+            st.close();
+            conn.close();
+        } catch (Exception e) {
 
         }
     }
-//Update Equipment
-    public void updateCihazButtonPushed()throws Exception{
+
+    //Update Equipment
+    public void updateCihazButtonPushed() throws Exception {
         String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
         Connection conn = DriverManager.getConnection(myUrl, "root", "root");
 
@@ -470,13 +512,14 @@ public class Controller implements Initializable {
         int i = Integer.parseInt(UpdateCihazIDTextField.getText());
         int b = Integer.parseInt(UpdateKutupMesafesiTextField.getText());
 
-        Equipment newCihaz = new Equipment(i, b,UpdateCihazAdiTextField.getText(), UpdateMPTasiyiciOrtamTextField.getText(), UpdateMiknatislamaTeknikTextField.getText(), UpdateUVTextField.getText(),UpdateIsikMesafesiTextField.getText());
+        Equipment newCihaz = new Equipment(i, b, UpdateCihazAdiTextField.getText(), UpdateMPTasiyiciOrtamTextField.getText(), UpdateMiknatislamaTeknikTextField.getText(), UpdateUVTextField.getText(), UpdateIsikMesafesiTextField.getText());
 
         DB.UpdateCihaz(newCihaz, conn);
 
         conn.close();
         refreshCihazTableview();
     }
+
     //Update User
     public void updateUserButtonPushed() throws Exception {
         System.out.println("Çalışıom");
@@ -504,10 +547,7 @@ public class Controller implements Initializable {
         int b = Integer.parseInt(DeletFirmaIdTextField.getText());
 
 
-
-
-
-        Firma newFirma = new Firma(FirmaAdiUpdateTextField.getText(), IlUpdateTextField.getText(), IlceUpdateTextField.getText(), JobOrderNoUpdateTextField.getText(), TeklifNoUpdateTextField.getText(),b);
+        Firma newFirma = new Firma(FirmaAdiUpdateTextField.getText(), IlUpdateTextField.getText(), IlceUpdateTextField.getText(), JobOrderNoUpdateTextField.getText(), TeklifNoUpdateTextField.getText(), b);
 
         DB.UpdateFirma(newFirma, conn);
 
@@ -528,11 +568,12 @@ public class Controller implements Initializable {
         conn.close();
         refreshTableview();
     }
+
     public void newCihazButtonPushed() throws Exception {
         String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
         Connection conn = DriverManager.getConnection(myUrl, "root", "root");
-        int b= Integer.parseInt(KutupMesafesiTextField.getText());
-        Equipment newCihaz = new Equipment(0,b, CihazAdiTextField.getText(),MPTasiyiciOrtamTextField.getText(),MiknatislamaTeknikTextField.getText(),UVTextField.getText(),IsikMesafesiTextField.getText());
+        int b = Integer.parseInt(KutupMesafesiTextField.getText());
+        Equipment newCihaz = new Equipment(0, b, CihazAdiTextField.getText(), MPTasiyiciOrtamTextField.getText(), MiknatislamaTeknikTextField.getText(), UVTextField.getText(), IsikMesafesiTextField.getText());
         DB.AddCihaz(newCihaz, conn);
 
 
@@ -591,16 +632,17 @@ public class Controller implements Initializable {
 
 
     }
-    public void changeScreenToCihazButtonPushed(ActionEvent event) throws Exception{
+
+    public void changeScreenToCihazButtonPushed(ActionEvent event) throws Exception {
         SceneName = 3;
         Parent UserSettingsParent = FXMLLoader.load(getClass().getResource("CihazSettings.fxml"));
         Scene UserSettingsScene2 = new Scene(UserSettingsParent, 1000, 500);
 
         //Sahne ayarları
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        System.out.println("hata yok");
+
         window.setScene(UserSettingsScene2);
-        System.out.println("aha hata buldum");
+
 
         window.show();
     }
@@ -608,6 +650,17 @@ public class Controller implements Initializable {
     public void changeScreenToMainMenu(ActionEvent event) throws Exception {
         SceneName = 0;
         Parent UserSettingsParent = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Scene UserSettingsScene = new Scene(UserSettingsParent);
+
+        //Sahne ayarları
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(UserSettingsScene);
+        window.show();
+    }
+
+    public void changeScreenToRapor(ActionEvent event) throws Exception {
+        SceneName = 4;
+        Parent UserSettingsParent = FXMLLoader.load(getClass().getResource("Raporpartone.fxml"));
         Scene UserSettingsScene = new Scene(UserSettingsParent);
 
         //Sahne ayarları
@@ -631,12 +684,13 @@ public class Controller implements Initializable {
         refreshTableview();
 
     }
-    public void DeleteCihazButtonPushed() throws Exception{
+
+    public void DeleteCihazButtonPushed() throws Exception {
         String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
         Connection conn = DriverManager.getConnection(myUrl, "root", "root");
         String query = "delete from cihazlar where id = ?";
         PreparedStatement preparedStmt = conn.prepareStatement(query);
-            int i = Integer.parseInt(DeleteCihazIDTextField.getText());
+        int i = Integer.parseInt(DeleteCihazIDTextField.getText());
         preparedStmt.setInt(1, i);
         preparedStmt.execute();
 

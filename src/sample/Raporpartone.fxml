@@ -24,46 +24,46 @@
                     <Image url="@icons/greybg.png" />
                   </image>
                 </ImageView>
-                <TextField layoutX="34.0" layoutY="165.0" prefWidth="200.0" />
-                <TextField layoutX="34.0" layoutY="233.0" prefWidth="200.0" />
-                <TextField layoutX="34.0" layoutY="304.0" prefWidth="200.0" />
-                <TextField layoutX="34.0" layoutY="367.0" prefWidth="200.0" />
-                <Label layoutX="34.0" layoutY="77.0" text="Müşteri Adı" textFill="WHITE">
+                <TextField fx:id="RaporProjeAdi" layoutX="34.0" layoutY="165.0" prefWidth="200.0" />
+                <TextField fx:id="RaporTestYeri" layoutX="34.0" layoutY="233.0" prefWidth="200.0" />
+                <TextField fx:id="RaporMuayneStand" layoutX="34.0" layoutY="304.0" prefWidth="200.0" />
+                <TextField fx:id="RaporDegerlenStand" layoutX="34.0" layoutY="367.0" prefWidth="200.0" />
+                <Label layoutX="35.0" layoutY="77.0" text="Müşteri Adı" textFill="WHITE">
                   <font>
                     <Font size="13.0" fx:id="x1" />
                   </font>
                 </Label>
-                <Label font="$x1" layoutX="34.0" layoutY="138.0" text="Proje Adı" textFill="WHITE" />
+                <Label font="$x1" layoutX="35.0" layoutY="138.0" text="Proje Adı" textFill="WHITE" />
                 <Label font="$x1" layoutX="34.0" layoutY="335.0" text="Değerlendirme Standardı" textFill="WHITE" />
-                <Label font="$x1" layoutX="34.0" layoutY="202.0" text="Test Yeri" textFill="WHITE" />
+                <Label font="$x1" layoutX="35.0" layoutY="202.0" text="Test Yeri" textFill="WHITE" />
                 <Label font="$x1" layoutX="34.0" layoutY="269.0" text="Muayne Standardı" textFill="WHITE" />
-                <Label font="$x1" layoutX="479.0" layoutY="419.0" text="Sayfa 1" textFill="WHITE" />
+                <Label font="$x1" layoutX="910.0" layoutY="30.0" text="Sayfa 1" textFill="WHITE" />
                 <Label layoutX="407.0" layoutY="22.0" minHeight="22.0" prefHeight="33.0" prefWidth="144.0" text="Genel Bilgiler" textFill="WHITE">
                   <font>
-                    <Font size="20.0" />
+                    <Font size="20.0" fx:id="x2" />
                   </font>
                 </Label>
-                <TextField layoutX="335.0" layoutY="165.0" prefWidth="200.0" />
-                <TextField layoutX="335.0" layoutY="233.0" prefWidth="200.0" />
-                <TextField layoutX="336.0" layoutY="103.0" prefWidth="200.0" />
-                <TextField layoutX="334.0" layoutY="304.0" prefWidth="200.0" />
-                <TextField layoutX="334.0" layoutY="367.0" prefWidth="200.0" />
+                <TextField fx:id="RaporMuayneKapsam" layoutX="335.0" layoutY="165.0" prefWidth="200.0" />
+                <TextField fx:id="RaporResimNo" layoutX="335.0" layoutY="233.0" prefWidth="200.0" />
+                <TextField fx:id="RaporMuaynePros" layoutX="336.0" layoutY="103.0" prefWidth="200.0" />
+                <TextField fx:id="RaporYuzeyDurum" layoutX="334.0" layoutY="304.0" prefWidth="200.0" />
+                <TextField fx:id="RaporMuayneAsama" layoutX="334.0" layoutY="367.0" prefWidth="200.0" />
                 <Label font="$x1" layoutX="336.0" layoutY="77.0" text="Muayne Prosedürü" textFill="WHITE" />
                 <Label font="$x1" layoutX="335.0" layoutY="138.0" text="Muayne Kapsamı" textFill="WHITE" />
                 <Label font="$x1" layoutX="334.0" layoutY="335.0" text="Muayne Aşaması" textFill="WHITE" />
                 <Label font="$x1" layoutX="335.0" layoutY="202.0" text="Resim No" textFill="WHITE" />
                 <Label font="$x1" layoutX="336.0" layoutY="269.0" text="Yüzey Durumu" textFill="WHITE" />
-                <TextField layoutX="664.0" layoutY="165.0" prefWidth="200.0" />
-                <TextField layoutX="664.0" layoutY="233.0" prefWidth="200.0" />
-                <TextField layoutX="664.0" layoutY="103.0" prefWidth="200.0" />
-                <TextField layoutX="664.0" layoutY="304.0" prefWidth="200.0" />
-                <TextField layoutX="664.0" layoutY="367.0" prefWidth="200.0" />
+                <TextField fx:id="RaporRaporNo" layoutX="664.0" layoutY="165.0" prefWidth="200.0" />
+                <TextField fx:id="RaporRaporTarihi" layoutX="664.0" layoutY="233.0" prefWidth="200.0" />
+                <TextField fx:id="RaporSayfaNo" layoutX="664.0" layoutY="103.0" prefWidth="200.0" />
+                <TextField fx:id="RaporIsEmriNo" layoutX="664.0" layoutY="304.0" prefWidth="200.0" />
+                <TextField fx:id="RaporTeklifNo" layoutX="664.0" layoutY="367.0" prefWidth="200.0" />
                 <Label font="$x1" layoutX="664.0" layoutY="77.0" text="Sayfa No" textFill="WHITE" />
                 <Label font="$x1" layoutX="664.0" layoutY="138.0" text="Rapor No" textFill="WHITE" />
                 <Label font="$x1" layoutX="664.0" layoutY="335.0" text="Teklif No" textFill="WHITE" />
                 <Label font="$x1" layoutX="664.0" layoutY="202.0" text="Rapor Tarihi" textFill="WHITE" />
                 <Label font="$x1" layoutX="664.0" layoutY="272.0" text="İş Emri No" textFill="WHITE" />
-                <ChoiceBox layoutX="34.0" layoutY="104.0" prefWidth="200.0">
+                <ChoiceBox fx:id="RaporCustomerName" layoutX="34.0" layoutY="104.0" prefWidth="200.0">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -72,6 +72,7 @@
                     </FXCollections>
                   </items>
                 </ChoiceBox>
+                <Button layoutX="443.0" layoutY="417.0" mnemonicParsing="false" onAction="#changeScreenToMainMenu" text="Ana Sayfa" />
               </children>
             </AnchorPane>
           </content>
@@ -80,11 +81,102 @@
           <content>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
               <children>
-                <ImageView fitHeight="585.5625" fitWidth="1041.0" layoutX="-32.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="585.5625" fitWidth="1041.0" layoutX="-35.0" layoutY="-26.0" pickOnBounds="true" preserveRatio="true">
                   <image>
                     <Image url="@icons/greybg.png" />
                   </image>
                 </ImageView>
+                <Label font="$x2" layoutX="421.0" layoutY="14.0" minHeight="22.0" prefHeight="33.0" prefWidth="166.0" text="Ekipman Bilgileri" textFill="WHITE" />
+                <TextField layoutX="43.0" layoutY="150.0" prefWidth="200.0" />
+                <TextField layoutX="43.0" layoutY="218.0" prefWidth="200.0" />
+                <TextField layoutX="43.0" layoutY="289.0" prefWidth="200.0" />
+                <TextField layoutX="43.0" layoutY="352.0" prefWidth="200.0" />
+                <TextField layoutX="357.0" layoutY="218.0" prefWidth="200.0" />
+                <TextField layoutX="358.0" layoutY="99.0" prefWidth="200.0" />
+                <TextField layoutX="356.0" layoutY="289.0" prefWidth="200.0" />
+                <TextField layoutX="356.0" layoutY="352.0" prefWidth="200.0" />
+                <TextField layoutX="683.0" layoutY="150.0" prefWidth="200.0" />
+                <TextField layoutX="684.0" layoutY="218.0" prefWidth="200.0" />
+                <TextField layoutX="684.0" layoutY="99.0" prefWidth="200.0" />
+                <TextField layoutX="684.0" layoutY="289.0" prefWidth="200.0" />
+                <TextField layoutX="684.0" layoutY="352.0" prefWidth="200.0" />
+                <ChoiceBox layoutX="43.0" layoutY="98.0" prefWidth="200.0">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList">
+                      <String fx:value="Item 1" />
+                      <String fx:value="Item 2" />
+                      <String fx:value="Item 3" />
+                    </FXCollections>
+                  </items>
+                </ChoiceBox>
+                <Label font="$x1" layoutX="43.0" layoutY="72.0" text="Ekipman Adı" textFill="WHITE" />
+                <Label font="$x1" layoutX="43.0" layoutY="122.0" text="Kutup Mesafesi (mm)" textFill="WHITE" />
+                <Label font="$x1" layoutX="42.0" layoutY="319.0" text="Mıknatıslama Tekniği" textFill="WHITE" />
+                <Label font="$x1" layoutX="43.0" layoutY="186.0" text="Cihaz" textFill="WHITE" />
+                <Label font="$x1" layoutX="42.0" layoutY="253.0" text="MP Taşıyıcı Ortam" textFill="WHITE" />
+                <Label font="$x1" layoutX="909.0" layoutY="21.0" text="Sayfa 2" textFill="WHITE" />
+                <Label font="$x1" layoutX="358.0" layoutY="72.0" text="Muayne Bölgesi" textFill="WHITE" />
+                <Label font="$x1" layoutX="358.0" layoutY="126.0" text="Akım Tipi" textFill="WHITE" />
+                <Label font="$x1" layoutX="356.0" layoutY="323.0" text="Mıknatıs Giderimi" textFill="WHITE" />
+                <Label font="$x1" layoutX="357.0" layoutY="195.0" text="Luxmetre / Işık Şiddeti" textFill="WHITE" />
+                <Label font="$x1" layoutX="356.0" layoutY="257.0" text="Muayne Ortamı" textFill="WHITE" />
+                <Label font="$x1" layoutX="686.0" layoutY="72.0" text="Yüzey Sıcaklığı (°C)" textFill="WHITE" />
+                <Label font="$x1" layoutX="686.0" layoutY="130.0" text="Muayne Bölgesindeki Alan Şiddeti (kA/m)" textFill="WHITE" />
+                <Label font="$x1" layoutX="684.0" layoutY="323.0" text="Kaldırma Testi Tarih / No" textFill="WHITE" />
+                <Label font="$x1" layoutX="684.0" layoutY="195.0" text="Yüzey" textFill="WHITE" />
+                <Label font="$x1" layoutX="684.0" layoutY="262.0" text="Işık Cihazı Tanımı" textFill="WHITE" />
+                <ChoiceBox layoutX="358.0" layoutY="148.0" prefWidth="84.0">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList">
+                      <String fx:value="Item 1" />
+                      <String fx:value="Item 2" />
+                      <String fx:value="Item 3" />
+                    </FXCollections>
+                  </items>
+                </ChoiceBox>
+                <TextField layoutX="42.0" layoutY="418.0" prefWidth="200.0" />
+                <Label font="$x1" layoutX="41.0" layoutY="385.0" text="UV Işık Şiddeti" textFill="WHITE" />
+                <TextField layoutX="356.0" layoutY="420.0" prefWidth="200.0" />
+                <Label font="$x1" layoutX="356.0" layoutY="387.0" text="Işık Mesafesi" textFill="WHITE" />
+                <TextField layoutX="1002.0" layoutY="429.0" prefWidth="200.0" />
+                <Label font="$x1" layoutX="1000.0" layoutY="396.0" text="Isıl İşlem" textFill="WHITE" />
+                <TextField layoutX="686.0" layoutY="418.0" prefWidth="200.0" />
+                <Label font="$x1" layoutX="686.0" layoutY="385.0" text="Isıl İşlem" textFill="WHITE" />
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+        <Tab text="Ekipman Bilgileri 2">
+          <content>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+              <children>
+                <ImageView fitHeight="585.5625" fitWidth="1041.0" layoutX="-35.0" layoutY="-26.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                    <Image url="@icons/greybg.png" />
+                  </image>
+                </ImageView>
+                <Label font="$x2" layoutX="421.0" layoutY="14.0" minHeight="22.0" prefHeight="33.0" prefWidth="166.0" text="Ekipman Bilgileri 2" textFill="WHITE" />
+                <TextField layoutX="163.0" layoutY="119.0" prefWidth="200.0" />
+                <TextField layoutX="163.0" layoutY="191.0" prefWidth="200.0" />
+                <Label font="$x1" layoutX="163.0" layoutY="93.0" text="Standart Sapmalar" textFill="WHITE" />
+                <Label font="$x1" layoutX="163.0" layoutY="159.0" text="Muayne Tarihleri" textFill="WHITE" />
+                <Label font="$x1" layoutX="163.0" layoutY="236.0" text="Açıklamalar ve Ekler" textFill="WHITE" />
+                <TextField layoutX="1002.0" layoutY="429.0" prefWidth="200.0" />
+                <Label font="$x1" layoutX="1000.0" layoutY="396.0" text="Isıl İşlem" textFill="WHITE" />
+                <CheckBox layoutX="559.0" layoutY="238.0" mnemonicParsing="false" text="" />
+                <TextArea layoutX="163.0" layoutY="267.0" prefHeight="102.0" prefWidth="200.00009999999747" wrapText="true" />
+                <CheckBox layoutX="826.0" layoutY="246.0" mnemonicParsing="false" text="" />
+                <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="468.0" layoutY="92.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                    <Image url="@icons/ButtWeld.JPG" />
+                  </image>
+                </ImageView>
+                <ImageView fitHeight="133.33331298828125" fitWidth="249.03576839136318" layoutX="711.0" layoutY="95.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                    <Image url="@icons/FilletWeld.JPG" />
+                  </image>
+                </ImageView>
+                <Label font="$x1" layoutX="905.0" layoutY="25.0" text="Sayfa 3" textFill="WHITE" />
               </children>
             </AnchorPane>
           </content>
@@ -98,13 +190,135 @@
                     <Image url="@icons/greybg.png" />
                   </image>
                 </ImageView>
+                <TableView layoutX="162.0" layoutY="78.0" prefHeight="200.0" prefWidth="685.0">
+                  <columns>
+                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="49.0" text="Sıra No" />
+                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="122.0" text="Kaynaklı / Parça No" />
+                    <TableColumn prefWidth="75.0" text="Kontrol Uzn." />
+                    <TableColumn prefWidth="75.0" text="Kaynak Yön." />
+                    <TableColumn prefWidth="75.0" text="Kalınlık(mm)" />
+                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="62.0" text="Çap(mm)" />
+                    <TableColumn prefWidth="75.0" text="Hata Tipi" />
+                    <TableColumn prefWidth="75.0" text="Hatanın Yeri" />
+                    <TableColumn prefWidth="75.0" text="Sonuç" />
+                  </columns>
+                </TableView>
+                <Label font="$x1" layoutX="44.0" layoutY="293.0" prefWidth="68.0" text="Sıra No" textFill="WHITE" />
+                <Label font="$x1" layoutX="112.0" layoutY="293.0" prefWidth="118.0" text="Kaynaklı / Parça No" textFill="WHITE" />
+                <Label font="$x1" layoutX="244.0" layoutY="293.0" prefWidth="118.0" text="Kontrol Uzn." textFill="WHITE" />
+                <Label font="$x1" layoutX="499.0" layoutY="293.0" prefWidth="82.0" text="Kalınlık(mm)" textFill="WHITE" />
+                <Label font="$x1" layoutX="370.0" layoutY="293.0" prefWidth="82.0" text="Kaynak Yön." textFill="WHITE" />
+                <Label font="$x1" layoutX="626.0" layoutY="293.0" prefWidth="68.0" text="Çap(mm)" textFill="WHITE" />
+                <Label font="$x1" layoutX="752.0" layoutY="293.0" prefWidth="68.0" text="Hata Tipi" textFill="WHITE" />
+                <Label font="$x1" layoutX="870.0" layoutY="293.0" prefWidth="92.0" text="Hatanın Yeri" textFill="WHITE" />
+                <Label font="$x1" layoutX="44.0" layoutY="361.0" prefWidth="68.0" text="Sonuç" textFill="WHITE" />
+                <TextField layoutX="626.0" layoutY="321.0" prefWidth="92.0" />
+                <TextField layoutX="112.0" layoutY="321.0" prefWidth="92.0" />
+                <TextField layoutX="752.0" layoutY="321.0" prefWidth="92.0" />
+                <TextField layoutX="499.0" layoutY="321.0" prefWidth="92.00009999999747" />
+                <TextField layoutX="244.0" layoutY="321.0" prefWidth="92.0" />
+                <TextField layoutX="51.0" layoutY="321.0" prefWidth="27.0" />
+                <TextField layoutX="370.0" layoutY="321.0" prefWidth="92.0" />
+                <TextField layoutX="870.0" layoutY="321.0" prefWidth="92.0" />
+                <ChoiceBox layoutX="44.0" layoutY="391.0" prefWidth="68.0">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList">
+                      <String fx:value="Item 1" />
+                      <String fx:value="Item 2" />
+                      <String fx:value="Item 3" />
+                    </FXCollections>
+                  </items>
+                </ChoiceBox>
+                <Button layoutX="433.0" layoutY="379.0" mnemonicParsing="false" prefWidth="100.0" text="Ekle" />
+                <Button layoutX="433.0" layoutY="412.0" mnemonicParsing="false" prefWidth="100.0" text="Sil" />
+                <Label font="$x1" layoutX="941.0" layoutY="34.0" text="Sayfa 4" textFill="WHITE" />
+                <Label font="$x2" layoutX="422.0" layoutY="15.0" minHeight="22.0" prefHeight="33.0" prefWidth="166.0" text="Muayne Sonuçları" textFill="WHITE" />
               </children>
             </AnchorPane>
           </content>
         </Tab>
         <Tab text="Personel Bilgileri">
           <content>
-            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+              <children>
+                <ImageView fitHeight="585.5625" fitWidth="1041.0" layoutX="-32.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                    <Image url="@icons/greybg.png" />
+                  </image>
+                </ImageView>
+                <Label layoutX="143.0" layoutY="115.0" prefWidth="68.0" text="Operatör" textFill="WHITE">
+                  <font>
+                    <Font size="15.0" fx:id="x3" />
+                  </font>
+                </Label>
+                <Label font="$x1" layoutX="13.0" layoutY="208.0" prefWidth="118.0" text="Adı Soyadı" textFill="WHITE" />
+                <Label font="$x1" layoutX="13.0" layoutY="252.0" prefWidth="118.0" text="Seviye" textFill="WHITE" />
+                <Label font="$x1" layoutX="13.0" layoutY="160.0" prefWidth="82.0" text="Seç" textFill="WHITE" />
+                <Label font="$x1" layoutX="13.0" layoutY="302.0" prefWidth="68.0" text="Tarih" textFill="WHITE" />
+                <TextField layoutX="752.0" layoutY="302.0" prefWidth="92.0" />
+                <TextField layoutX="131.0" layoutY="207.0" prefWidth="92.0" />
+                <TextField layoutX="752.0" layoutY="253.0" prefWidth="92.0" />
+                <TextField layoutX="530.0" layoutY="302.0" prefWidth="92.00009999999747" />
+                <TextField layoutX="131.0" layoutY="253.0" prefWidth="92.0" />
+                <TextField layoutX="131.0" layoutY="300.0" prefWidth="92.0" />
+                <Label font="$x1" layoutX="941.0" layoutY="34.0" text="Sayfa 5" textFill="WHITE" />
+                <Label font="$x2" layoutX="422.0" layoutY="15.0" minHeight="22.0" prefHeight="33.0" prefWidth="166.0" text="Personel Bilgileri" textFill="WHITE" />
+                <Label font="$x3" layoutX="554.0" layoutY="115.0" prefWidth="68.0" text="Onay" textFill="WHITE" />
+                <Label font="$x3" layoutX="333.0" layoutY="115.0" prefWidth="100.0" text="Değerlendiren" textFill="WHITE" />
+                <Label font="$x3" layoutX="764.0" layoutY="115.0" prefWidth="68.0" text="Müşteri" textFill="WHITE" />
+                <ComboBox layoutX="131.0" layoutY="160.0" prefHeight="21.0" prefWidth="92.0">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList">
+                      <String fx:value="Item 1" />
+                      <String fx:value="Item 2" />
+                      <String fx:value="Item 3" />
+                    </FXCollections>
+                  </items>
+                </ComboBox>
+                <TextField layoutX="337.0" layoutY="207.0" prefWidth="92.0" />
+                <TextField layoutX="337.0" layoutY="253.0" prefWidth="92.0" />
+                <TextField layoutX="337.0" layoutY="300.0" prefWidth="92.0" />
+                <ComboBox layoutX="337.0" layoutY="160.0" prefHeight="21.0" prefWidth="92.0">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList">
+                      <String fx:value="Item 1" />
+                      <String fx:value="Item 2" />
+                      <String fx:value="Item 3" />
+                    </FXCollections>
+                  </items>
+                </ComboBox>
+                <TextField layoutX="530.0" layoutY="207.0" prefWidth="92.0" />
+                <TextField layoutX="530.0" layoutY="253.0" prefWidth="92.0" />
+                <TextField layoutX="752.0" layoutY="207.0" prefWidth="92.0" />
+                <ComboBox layoutX="530.0" layoutY="160.0" prefHeight="21.0" prefWidth="92.0">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList">
+                      <String fx:value="Item 1" />
+                      <String fx:value="Item 2" />
+                      <String fx:value="Item 3" />
+                    </FXCollections>
+                  </items>
+                </ComboBox>
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+        <Tab text="Kaydet ve Yükle">
+          <content>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+              <children>
+                <ImageView fitHeight="585.5625" fitWidth="1041.0" layoutX="-32.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                    <Image url="@icons/greybg.png" />
+                  </image>
+                </ImageView>
+                <Label font="$x1" layoutX="941.0" layoutY="34.0" prefWidth="44.9998779296875" text="Sayfa 6" textFill="WHITE" />
+                <Label font="$x2" layoutX="422.0" layoutY="15.0" minHeight="22.0" prefHeight="33.0" prefWidth="166.0" text="Kaydet ve Yükle" textFill="WHITE" />
+                <Button layoutX="421.0" layoutY="148.0" mnemonicParsing="false" prefWidth="135.0" text="Kaydet" />
+                <Button layoutX="421.0" layoutY="187.0" mnemonicParsing="false" onAction="#changeScreenToMainMenu" prefWidth="135.0" text="Ana Menü" />
+                <ProgressBar layoutX="389.0" layoutY="226.0" prefHeight="18.0" prefWidth="200.0" progress="0.0" />
+              </children>
+            </AnchorPane>
           </content>
         </Tab>
       </tabs>
