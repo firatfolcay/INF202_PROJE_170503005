@@ -63,7 +63,8 @@
                 <Label font="$x1" layoutX="664.0" layoutY="335.0" text="Teklif No" textFill="WHITE" />
                 <Label font="$x1" layoutX="664.0" layoutY="202.0" text="Rapor Tarihi" textFill="WHITE" />
                 <Label font="$x1" layoutX="664.0" layoutY="272.0" text="İş Emri No" textFill="WHITE" />
-                <ChoiceBox fx:id="RaporCustomerName" layoutX="34.0" layoutY="104.0" prefWidth="200.0">
+                <Button layoutX="443.0" layoutY="417.0" mnemonicParsing="false" onAction="#changeScreenToMainMenu" text="Ana Sayfa" />
+                <ComboBox fx:id="RaporCustomerName" layoutX="34.0" layoutY="104.0" onAction="#setGenelbilgilerfromcombobox" prefHeight="21.0" prefWidth="200.0">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -71,8 +72,7 @@
                       <String fx:value="Item 3" />
                     </FXCollections>
                   </items>
-                </ChoiceBox>
-                <Button layoutX="443.0" layoutY="417.0" mnemonicParsing="false" onAction="#changeScreenToMainMenu" text="Ana Sayfa" />
+                </ComboBox>
               </children>
             </AnchorPane>
           </content>
@@ -87,28 +87,19 @@
                   </image>
                 </ImageView>
                 <Label font="$x2" layoutX="421.0" layoutY="14.0" minHeight="22.0" prefHeight="33.0" prefWidth="166.0" text="Ekipman Bilgileri" textFill="WHITE" />
-                <TextField layoutX="43.0" layoutY="150.0" prefWidth="200.0" />
-                <TextField layoutX="43.0" layoutY="218.0" prefWidth="200.0" />
-                <TextField layoutX="43.0" layoutY="289.0" prefWidth="200.0" />
-                <TextField layoutX="43.0" layoutY="352.0" prefWidth="200.0" />
-                <TextField layoutX="357.0" layoutY="218.0" prefWidth="200.0" />
-                <TextField layoutX="358.0" layoutY="99.0" prefWidth="200.0" />
-                <TextField layoutX="356.0" layoutY="289.0" prefWidth="200.0" />
-                <TextField layoutX="356.0" layoutY="352.0" prefWidth="200.0" />
-                <TextField layoutX="683.0" layoutY="150.0" prefWidth="200.0" />
-                <TextField layoutX="684.0" layoutY="218.0" prefWidth="200.0" />
-                <TextField layoutX="684.0" layoutY="99.0" prefWidth="200.0" />
-                <TextField layoutX="684.0" layoutY="289.0" prefWidth="200.0" />
-                <TextField layoutX="684.0" layoutY="352.0" prefWidth="200.0" />
-                <ChoiceBox layoutX="43.0" layoutY="98.0" prefWidth="200.0">
-                  <items>
-                    <FXCollections fx:factory="observableArrayList">
-                      <String fx:value="Item 1" />
-                      <String fx:value="Item 2" />
-                      <String fx:value="Item 3" />
-                    </FXCollections>
-                  </items>
-                </ChoiceBox>
+                <TextField fx:id="RaporKutupMesafesi" layoutX="43.0" layoutY="150.0" prefWidth="200.0" />
+                <TextField fx:id="RaporCihaz" layoutX="43.0" layoutY="218.0" prefWidth="200.0" />
+                <TextField fx:id="RaporMPTasiyici" layoutX="43.0" layoutY="289.0" prefWidth="200.0" />
+                <TextField fx:id="RaporMiknatisTek" layoutX="43.0" layoutY="352.0" prefWidth="200.0" />
+                <TextField fx:id="RaporLuxmetre" layoutX="357.0" layoutY="218.0" prefWidth="200.0" />
+                <TextField fx:id="RaporMuayneBolg" layoutX="358.0" layoutY="99.0" prefWidth="200.0" />
+                <TextField fx:id="RaporMuayneOrt" layoutX="356.0" layoutY="289.0" prefWidth="200.0" />
+                <TextField fx:id="RaporMagnetGiderim" layoutX="357.0" layoutY="352.0" prefWidth="200.0" />
+                <TextField fx:id="RaporAlanSiddeti" layoutX="683.0" layoutY="150.0" prefWidth="200.0" />
+                <TextField fx:id="RaporYuzey" layoutX="684.0" layoutY="218.0" prefWidth="200.0" />
+                <TextField fx:id="RaporYuzekSicaklik" layoutX="684.0" layoutY="99.0" prefWidth="200.0" />
+                <TextField id="RaporIsıkCihazTanim" fx:id="RaporIsikCihazTanim" layoutX="684.0" layoutY="289.0" prefWidth="200.0" />
+                <TextField fx:id="RaporKaldirmaTesti" layoutX="684.0" layoutY="352.0" prefWidth="200.0" />
                 <Label font="$x1" layoutX="43.0" layoutY="72.0" text="Ekipman Adı" textFill="WHITE" />
                 <Label font="$x1" layoutX="43.0" layoutY="122.0" text="Kutup Mesafesi (mm)" textFill="WHITE" />
                 <Label font="$x1" layoutX="42.0" layoutY="319.0" text="Mıknatıslama Tekniği" textFill="WHITE" />
@@ -125,7 +116,15 @@
                 <Label font="$x1" layoutX="684.0" layoutY="323.0" text="Kaldırma Testi Tarih / No" textFill="WHITE" />
                 <Label font="$x1" layoutX="684.0" layoutY="195.0" text="Yüzey" textFill="WHITE" />
                 <Label font="$x1" layoutX="684.0" layoutY="262.0" text="Işık Cihazı Tanımı" textFill="WHITE" />
-                <ChoiceBox layoutX="358.0" layoutY="148.0" prefWidth="84.0">
+                <TextField id="RaporUVIsık" fx:id="RaporUVIsik" layoutX="42.0" layoutY="418.0" prefWidth="200.0" />
+                <Label font="$x1" layoutX="41.0" layoutY="385.0" text="UV Işık Şiddeti" textFill="WHITE" />
+                <TextField id="RaporIsıkMesafe" fx:id="RaporIsikMesafe" layoutX="356.0" layoutY="420.0" prefWidth="200.0" />
+                <Label font="$x1" layoutX="356.0" layoutY="387.0" text="Işık Mesafesi" textFill="WHITE" />
+                <TextField layoutX="1002.0" layoutY="429.0" prefWidth="200.0" />
+                <Label font="$x1" layoutX="1000.0" layoutY="396.0" text="Isıl İşlem" textFill="WHITE" />
+                <TextField fx:id="RaporIsilIslem" layoutX="686.0" layoutY="418.0" prefWidth="200.0" />
+                <Label font="$x1" layoutX="686.0" layoutY="385.0" text="Isıl İşlem" textFill="WHITE" />
+                <ComboBox fx:id="RaporEkipman" layoutX="41.0" layoutY="99.0" onAction="#setEkipmanBilgileriFromCombobox" prefHeight="21.0" prefWidth="200.0">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -133,15 +132,16 @@
                       <String fx:value="Item 3" />
                     </FXCollections>
                   </items>
-                </ChoiceBox>
-                <TextField layoutX="42.0" layoutY="418.0" prefWidth="200.0" />
-                <Label font="$x1" layoutX="41.0" layoutY="385.0" text="UV Işık Şiddeti" textFill="WHITE" />
-                <TextField layoutX="356.0" layoutY="420.0" prefWidth="200.0" />
-                <Label font="$x1" layoutX="356.0" layoutY="387.0" text="Işık Mesafesi" textFill="WHITE" />
-                <TextField layoutX="1002.0" layoutY="429.0" prefWidth="200.0" />
-                <Label font="$x1" layoutX="1000.0" layoutY="396.0" text="Isıl İşlem" textFill="WHITE" />
-                <TextField layoutX="686.0" layoutY="418.0" prefWidth="200.0" />
-                <Label font="$x1" layoutX="686.0" layoutY="385.0" text="Isıl İşlem" textFill="WHITE" />
+                </ComboBox>
+                <ComboBox fx:id="RaporAkimTipi" layoutX="358.0" layoutY="151.0" prefHeight="21.0" prefWidth="84.0">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList">
+                      <String fx:value="Item 1" />
+                      <String fx:value="Item 2" />
+                      <String fx:value="Item 3" />
+                    </FXCollections>
+                  </items>
+                </ComboBox>
               </children>
             </AnchorPane>
           </content>

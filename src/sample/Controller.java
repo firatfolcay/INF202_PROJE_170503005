@@ -4,6 +4,7 @@ import javafx.beans.Observable;
 import javafx.beans.property.Property;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -151,7 +152,7 @@ public class Controller implements Initializable {
     //RAPOR SIDE---------------------------------
     //  Genel bilgiler -----------------------
     @FXML
-    private ChoiceBox RaporCustomerName;
+    private ComboBox RaporCustomerName;
     @FXML
     private TextField RaporProjeAdi;
     @FXML
@@ -180,6 +181,43 @@ public class Controller implements Initializable {
     private TextField RaporIsEmriNo;
     @FXML
     private TextField RaporTeklifNo;
+    //Ekipman Bilgileri--------------------
+    @FXML
+    private TextField RaporKutupMesafesi;
+    @FXML
+    private TextField RaporCihaz;
+    @FXML
+    private TextField RaporMPTasiyici;
+    @FXML
+    private TextField RaporMiknatisTek;
+    @FXML
+    private TextField RaporUVIsik;
+    @FXML
+    private TextField RaporMuayneBolg;
+    @FXML
+    private TextField RaporLuxmetre;
+    @FXML
+    private TextField RaporMuayneOrt;
+    @FXML
+    private TextField RaporMagnetGiderim;
+    @FXML
+    private TextField RaporIsikMesafe;
+    @FXML
+    private TextField RaporYuzekSicaklik;
+    @FXML
+    private TextField RaporAlanSiddeti;
+    @FXML
+    private TextField RaporYuzey;
+    @FXML
+    private TextField RaporIsikCihazTanim;
+    @FXML
+    private TextField RaporKaldirmaTesti;
+    @FXML
+    private TextField RaporIsilIslem;
+    @FXML
+    private ComboBox RaporEkipman;
+    @FXML
+    private ComboBox RaporAkimTipi;
 
 
     @Override
@@ -196,7 +234,11 @@ public class Controller implements Initializable {
                 System.out.println("setledim be gari");
 
             } else if (SceneName == 4) {
+                setGenelbilgiler();
+                setEkipmanBilgileri();
+
                 System.out.println("Rapor Sayfası Açıldı");
+
             }
             System.out.println("Sahne no: " + SceneName);
 
@@ -378,8 +420,135 @@ public class Controller implements Initializable {
 
 
     }
-    // select user from table
 
+    public void setEkipmanBilgileriFromCombobox() {
+        try {
+            char SelectedId;
+            String a = (String) RaporEkipman.getValue();
+            SelectedId = a.charAt(0);
+            System.out.println(SelectedId);
+            String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
+            Connection conn = DriverManager.getConnection(myUrl, "root", "root");
+            String query = "SELECT * FROM cihazlar where id=" + SelectedId;
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                RaporKutupMesafesi.setText(rs.getString("kutup_mesafesi"));
+                RaporCihaz.setText(rs.getString("cihaz_name"));
+                RaporMPTasiyici.setText(rs.getString("mp_ortam"));
+                RaporMiknatisTek.setText(rs.getString("magnet_teknik"));
+                RaporUVIsik.setText(rs.getString("uv"));
+                RaporIsikMesafe.setText(rs.getString("light_mesafesi"));
+
+
+            }
+
+            st.close();
+            conn.close();
+
+        } catch (Exception a) {
+        }
+    }
+
+    public void setEkipmanBilgileri() {
+        try {
+            String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
+            Connection conn = DriverManager.getConnection(myUrl, "root", "root");
+            String query = "SELECT * FROM cihazlar";
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            ObservableList<String> a = FXCollections.observableArrayList();
+            RaporMuayneBolg.setText("KAYNAK+HAZ");
+            RaporLuxmetre.setText("1266 Lux");
+            RaporAlanSiddeti.setText("3.2 kA/m");
+            RaporYuzey.setText("TAŞLANMIŞ / GRINDING");
+            RaporIsikCihazTanim.setText("***");
+
+
+            while (rs.next()) {
+
+
+                String cihazName = rs.getInt("id") + " - " + rs.getString("cihaz_name");
+
+
+                System.out.println(cihazName);
+                a.add(cihazName);
+
+
+            }
+
+            RaporEkipman.setItems(a);
+            RaporAkimTipi.setItems(FXCollections.observableArrayList("AC", "DC"));
+            st.close();
+            conn.close();
+        } catch (Exception a) {
+        }
+    }
+
+    public void setGenelbilgilerfromcombobox() {
+        try {
+            char SelectedId;
+            String a = (String) RaporCustomerName.getValue();
+            SelectedId = a.charAt(0);
+            System.out.println(SelectedId);
+            String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
+            Connection conn = DriverManager.getConnection(myUrl, "root", "root");
+            String query = "SELECT * FROM firmalar where id=" + SelectedId;
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                RaporTestYeri.setText(rs.getString("firma_Ilce") + " " + rs.getString("firma_Il"));
+                RaporIsEmriNo.setText(rs.getString("firma_JobOrderNo"));
+                RaporTeklifNo.setText(rs.getString("firma_OfferNo"));
+
+            }
+
+            st.close();
+            conn.close();
+        } catch (Exception a) {
+
+        }
+
+    }
+
+    //set choicebox
+    public void setGenelbilgiler() {
+        try {
+            String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
+            Connection conn = DriverManager.getConnection(myUrl, "root", "root");
+            String query = "SELECT id, firma_name FROM firmalar";
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            ObservableList<String> a = FXCollections.observableArrayList();
+            RaporMuayneStand.setText("TS EN ISO 17638");
+            RaporDegerlenStand.setText("TS EN ISO 23278 Class B");
+            RaporMuaynePros.setText("P-161-664");
+            RaporMuayneKapsam.setText("100");
+            RaporResimNo.setText("-");
+            RaporSayfaNo.setText("1");
+
+            while (rs.next()) {
+
+
+                String firmaName = rs.getInt("id") + " - " + rs.getString("firma_name");
+
+
+                System.out.println(firmaName);
+                a.add(firmaName);
+
+
+            }
+
+            RaporCustomerName.setItems(a);
+            st.close();
+            conn.close();
+
+        } catch (Exception e) {
+
+        }
+    }
+
+    // select user from table
     public void selectUser() {
         try {
 
@@ -399,7 +568,7 @@ public class Controller implements Initializable {
                 int id = rs.getInt("id");
 
                 IdUpdateTextField.setText("" + id);
-                DeleteCihazIDTextField.setText("" + id);
+                DeletIDTextField.setText("" + id);
                 String firstName = rs.getString("first_name");
                 UpdateNameTextField.setText(firstName);
 
@@ -536,7 +705,7 @@ public class Controller implements Initializable {
         DB.UpdateUser(newUser, conn);
 
         conn.close();
-        refreshCihazTableview();
+        refreshTableview();
 
     }
 
@@ -714,6 +883,3 @@ public class Controller implements Initializable {
     }
 
 }
-
-
-
