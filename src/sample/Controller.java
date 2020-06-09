@@ -268,6 +268,32 @@ public class Controller implements Initializable {
     private TableColumn<MuayneTable, String> HataYeriColumn;
     @FXML
     private TableColumn<MuayneTable, String> SonucColumn;
+    //Personel Bilgileri -----------------
+    @FXML
+    private ComboBox RaporOperatorCombobox;
+    @FXML
+    private ComboBox RaporDegerlendirenCombobox;
+    @FXML
+    private ComboBox RaporOnayCombobox;
+    @FXML
+    private TextField RaporOperatorName;
+    @FXML
+    private TextField RaporOperatorSeviye;
+    @FXML
+    private TextField RaporOperatorTarih;
+    @FXML
+    private TextField RaporDegerlendirenName;
+    @FXML
+    private TextField RaporDegerlendirenSeviye;
+    @FXML
+    private TextField RaporDegerlendirenTarih;
+    @FXML
+    private TextField RaporOnayName;
+    @FXML
+    private TextField RaporOnaySeviye;
+    @FXML
+    private TextField RaporOnayTarih;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -286,6 +312,7 @@ public class Controller implements Initializable {
 
                 setGenelbilgiler();
                 setEkipmanBilgileri();
+                setPersonelBilgileri();
                 setMuayneTableView();
 
 
@@ -396,7 +423,7 @@ public class Controller implements Initializable {
             String HataTipi = rs.getString("HataTipi");
             String HataYeri = rs.getString("HataYeri");
             String Sonuc = rs.getString("Sonuc");
-            Muayneler.add(new MuayneTable(SiraNo,Kaynak,KontrolUzn,KaynakYon,Kalinlik,Cap,HataTipi,HataYeri,Sonuc));
+            Muayneler.add(new MuayneTable(SiraNo, Kaynak, KontrolUzn, KaynakYon, Kalinlik, Cap, HataTipi, HataYeri, Sonuc));
 
         }
         st.close();
@@ -523,16 +550,92 @@ public class Controller implements Initializable {
 
 
     }
-
-    public void setEkipmanBilgileriFromCombobox() {
+    public void setPersonelBilgileriDegerlendirenFromCombobox() {
         try {
-            char SelectedId;
-            String a = (String) RaporEkipman.getValue();
+            char SelectedId,SelectedId2;
+            String a = (String) RaporDegerlendirenCombobox.getValue();
             SelectedId = a.charAt(0);
+            SelectedId2 = a.charAt(1);
             System.out.println(SelectedId);
             String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
             Connection conn = DriverManager.getConnection(myUrl, "root", "root");
-            String query = "SELECT * FROM cihazlar where id=" + SelectedId;
+            String query = "SELECT first_name,last_name,is_admin FROM users where id=" + SelectedId+SelectedId2;
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                RaporDegerlendirenName.setText(rs.getString("first_name") + " " + rs.getString("last_name"));
+                RaporDegerlendirenSeviye.setText(rs.getString("is_admin"));
+
+
+            }
+
+            st.close();
+            conn.close();
+        } catch (Exception a) {
+
+        }
+    }
+    public void setPersonelBilgileriOnayFromCombobox() {
+        try {
+            char SelectedId,SelectedId2;
+            String a = (String) RaporOnayCombobox.getValue();
+            SelectedId = a.charAt(0);
+            SelectedId2 = a.charAt(1);
+            System.out.println(SelectedId);
+            String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
+            Connection conn = DriverManager.getConnection(myUrl, "root", "root");
+            String query = "SELECT first_name,last_name,is_admin FROM users where id=" + SelectedId+SelectedId2;
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                RaporOnayName.setText(rs.getString("first_name") + " " + rs.getString("last_name"));
+                RaporOnaySeviye.setText(rs.getString("is_admin"));
+
+
+            }
+
+            st.close();
+            conn.close();
+        } catch (Exception a) {
+
+        }
+    }
+    public void setPersonelBilgileriOperatorFromCombobox() {
+        try {
+            char SelectedId,SelectedId2;
+            String a = (String) RaporOperatorCombobox.getValue();
+            SelectedId = a.charAt(0);
+            SelectedId2 = a.charAt(1);
+            System.out.println(SelectedId);
+            String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
+            Connection conn = DriverManager.getConnection(myUrl, "root", "root");
+            String query = "SELECT first_name,last_name,is_admin FROM users where id=" + SelectedId+SelectedId2;
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                RaporOperatorName.setText(rs.getString("first_name") + " " + rs.getString("last_name"));
+                RaporOperatorSeviye.setText(rs.getString("is_admin"));
+
+
+            }
+
+            st.close();
+            conn.close();
+        } catch (Exception a) {
+
+        }
+    }
+
+    public void setEkipmanBilgileriFromCombobox() {
+        try {
+            char SelectedId,SelectedId2;
+            String a = (String) RaporEkipman.getValue();
+            SelectedId = a.charAt(0);
+            SelectedId2 = a.charAt(1);
+            System.out.println(SelectedId);
+            String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
+            Connection conn = DriverManager.getConnection(myUrl, "root", "root");
+            String query = "SELECT * FROM cihazlar where id=" + SelectedId+SelectedId2;
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
@@ -552,7 +655,29 @@ public class Controller implements Initializable {
         } catch (Exception a) {
         }
     }
+    public void setPersonelBilgileri(){
+        try {
+            String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
+            Connection conn = DriverManager.getConnection(myUrl, "root", "root");
+            String query = "SELECT * FROM users";
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            ObservableList<String> a = FXCollections.observableArrayList();
+            while (rs.next()) {
+                String cihazName = rs.getInt("id") + " - " + rs.getString("first_name")+" "+rs.getString("last_name");
 
+
+
+                a.add(cihazName);
+
+            }
+            RaporOnayCombobox.setItems(a);
+            RaporOperatorCombobox.setItems(a);
+            RaporDegerlendirenCombobox.setItems(a);
+
+        }
+        catch (Exception e){}
+    }
     public void setEkipmanBilgileri() {
         try {
             String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
@@ -590,13 +715,14 @@ public class Controller implements Initializable {
 
     public void setGenelbilgilerfromcombobox() {
         try {
-            char SelectedId;
+            char SelectedId,SelectedId2;
             String a = (String) RaporCustomerName.getValue();
             SelectedId = a.charAt(0);
+            SelectedId2 = a.charAt(1);
             System.out.println(SelectedId);
             String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
             Connection conn = DriverManager.getConnection(myUrl, "root", "root");
-            String query = "SELECT * FROM firmalar where id=" + SelectedId;
+            String query = "SELECT * FROM firmalar where id=" + SelectedId+SelectedId2;
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
@@ -966,7 +1092,8 @@ public class Controller implements Initializable {
         refreshTableview();
 
     }
-    public void DeleteMuayneButtonPushed() throws Exception{
+
+    public void DeleteMuayneButtonPushed() throws Exception {
         String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
         Connection conn = DriverManager.getConnection(myUrl, "root", "root");
         String query = "delete from muayne where SiraNo = ?";
@@ -976,6 +1103,7 @@ public class Controller implements Initializable {
         preparedStmt.execute();
         tableViewMuayne.setItems(getMuayneTable());
     }
+
     public void DeleteCihazButtonPushed() throws Exception {
         String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
         Connection conn = DriverManager.getConnection(myUrl, "root", "root");
