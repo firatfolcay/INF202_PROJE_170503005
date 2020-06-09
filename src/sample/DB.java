@@ -1,10 +1,32 @@
 package sample;
 
 import com.mysql.cj.util.DnsSrv;
+import sample.Library.MuayneTable;
 
 import java.sql.*;
 
 public class DB {
+
+    public static void AddMuayne(MuayneTable a,Connection conn){
+        try{
+
+            String query = "insert into muayne(SiraNo,Kaynak,KontrolUzn,KaynakYon,Kalinlik,Cap,HataTipi,HataYeri,Sonuc)"
+                    + "values (?,?,?,?,?,?,?,?,?)";
+            PreparedStatement preparedStmt2 = conn.prepareStatement(query);
+            preparedStmt2.setInt(1,a.getSiraNo());
+            preparedStmt2.setString(2,a.getKaynak());
+            preparedStmt2.setString(3,a.getKontrolUzn());
+            preparedStmt2.setString(4,a.getKaynakYon());
+            preparedStmt2.setString(5,a.getKalinlik());
+            preparedStmt2.setString(6,a.getCap());
+            preparedStmt2.setString(7,a.getHataTipi());
+            preparedStmt2.setString(8,a.getHataYeri());
+            preparedStmt2.setString(9,a.getSonuc());
+            preparedStmt2.execute();
+
+        }
+        catch (Exception e){}
+    }
     public static void AddCihaz(Equipment a,Connection conn){
         try{
             String query2="insert into cihazlar(cihaz_name,kutup_mesafesi,mp_ortam,magnet_teknik,uv,light_mesafesi)"

@@ -16,6 +16,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import sample.Library.MuayneTable;
 
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
@@ -218,7 +219,55 @@ public class Controller implements Initializable {
     private ComboBox RaporEkipman;
     @FXML
     private ComboBox RaporAkimTipi;
-
+    @FXML
+    private TextField RaporStandartSapma;
+    @FXML
+    private TextField RaporMuayneTarih;
+    @FXML
+    private TextArea Ekler;
+    @FXML
+    private CheckBox RaporButtWeld;
+    @FXML
+    private CheckBox RaporFilletWeld;
+    //Muayne Sonuçları------------
+    @FXML
+    private TextField RaporSiraNo;
+    @FXML
+    private TextField RaporKaynakParcaNo;
+    @FXML
+    private TextField RaporKontrolUzn;
+    @FXML
+    private TextField RaporKaynakYon;
+    @FXML
+    private TextField RaporKalin;
+    @FXML
+    private TextField RaporCap;
+    @FXML
+    private TextField RaporHataTipi;
+    @FXML
+    private TextField RaporHataYeri;
+    @FXML
+    private ComboBox<String> RaporSonuc;
+    @FXML
+    private TableView<MuayneTable> tableViewMuayne;
+    @FXML
+    private TableColumn<MuayneTable, Integer> SiraNoColumn;
+    @FXML
+    private TableColumn<MuayneTable, String> KaynakColumn;
+    @FXML
+    private TableColumn<MuayneTable, String> KontrolUznColumn;
+    @FXML
+    private TableColumn<MuayneTable, String> KaynakYonColumn;
+    @FXML
+    private TableColumn<MuayneTable, String> KalinlikColumn;
+    @FXML
+    private TableColumn<MuayneTable, String> CapColumn;
+    @FXML
+    private TableColumn<MuayneTable, String> HataTipiColumn;
+    @FXML
+    private TableColumn<MuayneTable, String> HataYeriColumn;
+    @FXML
+    private TableColumn<MuayneTable, String> SonucColumn;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -234,8 +283,11 @@ public class Controller implements Initializable {
                 System.out.println("setledim be gari");
 
             } else if (SceneName == 4) {
+
                 setGenelbilgiler();
                 setEkipmanBilgileri();
+                setMuayneTableView();
+
 
                 System.out.println("Rapor Sayfası Açıldı");
 
@@ -246,6 +298,31 @@ public class Controller implements Initializable {
         } catch (Exception a) {
             System.out.println(a);
         }
+    }
+
+    public void setMuayneTableView() throws Exception {
+        RaporSonuc.setItems(FXCollections.observableArrayList("OK", "RED"));
+
+        SiraNoColumn.setCellValueFactory(new PropertyValueFactory<MuayneTable, Integer>("SiraNo"));
+
+        KaynakColumn.setCellValueFactory(new PropertyValueFactory<MuayneTable, String>("Kaynak"));
+
+        KontrolUznColumn.setCellValueFactory(new PropertyValueFactory<MuayneTable, String>("KontrolUzn"));
+
+        KaynakYonColumn.setCellValueFactory(new PropertyValueFactory<MuayneTable, String>("KaynakYon"));
+
+        KalinlikColumn.setCellValueFactory(new PropertyValueFactory<MuayneTable, String>("Kalinlik"));
+
+        CapColumn.setCellValueFactory(new PropertyValueFactory<MuayneTable, String>("Cap"));
+
+        HataTipiColumn.setCellValueFactory(new PropertyValueFactory<MuayneTable, String>("HataTipi"));
+
+        HataYeriColumn.setCellValueFactory(new PropertyValueFactory<MuayneTable, String>("HataYeri"));
+
+        SonucColumn.setCellValueFactory(new PropertyValueFactory<MuayneTable, String>("Sonuc"));
+        tableViewMuayne.setItems(getMuayneTable());
+
+
     }
 
     public void setuserTableView() throws Exception {
@@ -299,6 +376,32 @@ public class Controller implements Initializable {
     public void refreshCihazTableview() throws Exception {
 
         tableViewCihaz.setItems(getEquipment());
+    }
+
+    public ObservableList<MuayneTable> getMuayneTable() throws Exception {
+        String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
+        Connection conn = DriverManager.getConnection(myUrl, "root", "root");
+        ObservableList<MuayneTable> Muayneler = FXCollections.observableArrayList();
+        String query = "SELECT * FROM muayne";
+        Statement st = conn.createStatement();
+        ResultSet rs = st.executeQuery(query);
+
+        while (rs.next()) {
+            int SiraNo = rs.getInt("SiraNo");
+            String Kaynak = rs.getString("Kaynak");
+            String KontrolUzn = rs.getString("KontrolUzn");
+            String KaynakYon = rs.getString("KaynakYon");
+            String Kalinlik = rs.getString("Kalinlik");
+            String Cap = rs.getString("Cap");
+            String HataTipi = rs.getString("HataTipi");
+            String HataYeri = rs.getString("HataYeri");
+            String Sonuc = rs.getString("Sonuc");
+            Muayneler.add(new MuayneTable(SiraNo,Kaynak,KontrolUzn,KaynakYon,Kalinlik,Cap,HataTipi,HataYeri,Sonuc));
+
+        }
+        st.close();
+        conn.close();
+        return Muayneler;
     }
 
 
@@ -463,7 +566,7 @@ public class Controller implements Initializable {
             RaporAlanSiddeti.setText("3.2 kA/m");
             RaporYuzey.setText("TAŞLANMIŞ / GRINDING");
             RaporIsikCihazTanim.setText("***");
-
+            RaporStandartSapma.setText("Standarttan sapma yoktur.");
 
             while (rs.next()) {
 
@@ -724,6 +827,15 @@ public class Controller implements Initializable {
         refreshFirmaTableview();
     }
 
+    public void newMuayneButtonPushed() throws Exception {
+        String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
+        Connection conn = DriverManager.getConnection(myUrl, "root", "root");
+        MuayneTable a = new MuayneTable(Integer.parseInt(RaporSiraNo.getText()), RaporKaynakParcaNo.getText(), RaporKontrolUzn.getText(), RaporKaynakYon.getText(), RaporKalin.getText(), RaporCap.getText(), RaporHataTipi.getText(), RaporHataYeri.getText(), RaporSonuc.getValue());
+        DB.AddMuayne(a, conn);
+        conn.close();
+        tableViewMuayne.setItems(getMuayneTable());
+
+    }
     // Add New user
 
     public void newUserButtonPushed() throws Exception {
@@ -736,6 +848,7 @@ public class Controller implements Initializable {
 
         conn.close();
         refreshTableview();
+
     }
 
     public void newCihazButtonPushed() throws Exception {
@@ -853,7 +966,16 @@ public class Controller implements Initializable {
         refreshTableview();
 
     }
-
+    public void DeleteMuayneButtonPushed() throws Exception{
+        String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
+        Connection conn = DriverManager.getConnection(myUrl, "root", "root");
+        String query = "delete from muayne where SiraNo = ?";
+        PreparedStatement preparedStmt = conn.prepareStatement(query);
+        int i = Integer.parseInt(RaporSiraNo.getText());
+        preparedStmt.setInt(1, i);
+        preparedStmt.execute();
+        tableViewMuayne.setItems(getMuayneTable());
+    }
     public void DeleteCihazButtonPushed() throws Exception {
         String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
         Connection conn = DriverManager.getConnection(myUrl, "root", "root");

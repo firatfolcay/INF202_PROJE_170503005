@@ -88,6 +88,22 @@ public class Main extends Application {
                     ");";
             PreparedStatement preparedStmt3 = conn.prepareStatement(query3);
             preparedStmt3.execute();
+
+            String query5 = "create table if not exists muayne (\n" +
+                    "  SiraNo int not null,\n" +
+                    "  Kaynak varchar(32) not null,\n" +
+                    "  KontrolUzn varchar(32) not null,\n" +
+
+                    "  KaynakYon varchar(32),\n" +
+                    "  Kalinlik varchar(32) not null,\n"+
+                    "  Cap varchar(32) not null,\n"+
+                    "  HataTipi varchar(32) not null,\n"+
+                    "  HataYeri varchar(32) not null,\n"+
+                    "  Sonuc varchar(32) not null,\n"+
+                    "  primary key (SiraNo)\n" +
+                    ");";
+            PreparedStatement preparedStmt11 = conn.prepareStatement(query5);
+            preparedStmt11.execute();
             //user ekleme
 /*
             String query2 = " insert into users (first_name, last_name, is_admin)"

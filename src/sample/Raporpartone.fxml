@@ -156,22 +156,22 @@
                   </image>
                 </ImageView>
                 <Label font="$x2" layoutX="421.0" layoutY="14.0" minHeight="22.0" prefHeight="33.0" prefWidth="166.0" text="Ekipman Bilgileri 2" textFill="WHITE" />
-                <TextField layoutX="163.0" layoutY="119.0" prefWidth="200.0" />
-                <TextField layoutX="163.0" layoutY="191.0" prefWidth="200.0" />
+                <TextField fx:id="RaporStandartSapma" layoutX="163.0" layoutY="119.0" prefWidth="200.0" />
+                <TextField fx:id="RaporMuayneTarih" layoutX="163.0" layoutY="191.0" prefWidth="200.0" />
                 <Label font="$x1" layoutX="163.0" layoutY="93.0" text="Standart Sapmalar" textFill="WHITE" />
                 <Label font="$x1" layoutX="163.0" layoutY="159.0" text="Muayne Tarihleri" textFill="WHITE" />
                 <Label font="$x1" layoutX="163.0" layoutY="236.0" text="Açıklamalar ve Ekler" textFill="WHITE" />
                 <TextField layoutX="1002.0" layoutY="429.0" prefWidth="200.0" />
                 <Label font="$x1" layoutX="1000.0" layoutY="396.0" text="Isıl İşlem" textFill="WHITE" />
-                <CheckBox layoutX="559.0" layoutY="238.0" mnemonicParsing="false" text="" />
-                <TextArea layoutX="163.0" layoutY="267.0" prefHeight="102.0" prefWidth="200.00009999999747" wrapText="true" />
-                <CheckBox layoutX="826.0" layoutY="246.0" mnemonicParsing="false" text="" />
+                <CheckBox fx:id="RaporButtWeld" layoutX="559.0" layoutY="238.0" mnemonicParsing="false" text="" />
+                <TextArea fx:id="Ekler" layoutX="163.0" layoutY="267.0" prefHeight="102.0" prefWidth="200.00009999999747" wrapText="true" />
+                <CheckBox fx:id="RaporFilletWeld" layoutX="826.0" layoutY="238.0" mnemonicParsing="false" text="" />
                 <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="468.0" layoutY="92.0" pickOnBounds="true" preserveRatio="true">
                   <image>
                     <Image url="@icons/ButtWeld.JPG" />
                   </image>
                 </ImageView>
-                <ImageView fitHeight="133.33331298828125" fitWidth="249.03576839136318" layoutX="711.0" layoutY="95.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="133.33331298828125" fitWidth="249.03576839136318" layoutX="711.0" layoutY="92.0" pickOnBounds="true" preserveRatio="true">
                   <image>
                     <Image url="@icons/FilletWeld.JPG" />
                   </image>
@@ -190,17 +190,17 @@
                     <Image url="@icons/greybg.png" />
                   </image>
                 </ImageView>
-                <TableView layoutX="162.0" layoutY="78.0" prefHeight="200.0" prefWidth="685.0">
+                <TableView fx:id="tableViewMuayne" layoutX="162.0" layoutY="78.0" prefHeight="200.0" prefWidth="685.0">
                   <columns>
-                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="49.0" text="Sıra No" />
-                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="122.0" text="Kaynaklı / Parça No" />
-                    <TableColumn prefWidth="75.0" text="Kontrol Uzn." />
-                    <TableColumn prefWidth="75.0" text="Kaynak Yön." />
-                    <TableColumn prefWidth="75.0" text="Kalınlık(mm)" />
-                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="62.0" text="Çap(mm)" />
-                    <TableColumn prefWidth="75.0" text="Hata Tipi" />
-                    <TableColumn prefWidth="75.0" text="Hatanın Yeri" />
-                    <TableColumn prefWidth="75.0" text="Sonuç" />
+                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="49.0" text="Sıra No" fx:id="SiraNoColumn" />
+                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="122.0" text="Kaynaklı / Parça No" fx:id="KaynakColumn" />
+                    <TableColumn prefWidth="75.0" text="Kontrol Uzn." fx:id="KontrolUznColumn" />
+                    <TableColumn prefWidth="75.0" text="Kaynak Yön." fx:id="KaynakYonColumn" />
+                    <TableColumn prefWidth="75.0" text="Kalınlık(mm)" fx:id="KalinlikColumn" />
+                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="62.0" text="Çap(mm)" fx:id="CapColumn" />
+                    <TableColumn prefWidth="75.0" text="Hata Tipi" fx:id="HataTipiColumn" />
+                    <TableColumn prefWidth="75.0" text="Hatanın Yeri" fx:id="HataYeriColumn" />
+                    <TableColumn prefWidth="75.0" text="Sonuç" fx:id="SonucColumn" />
                   </columns>
                 </TableView>
                 <Label font="$x1" layoutX="44.0" layoutY="293.0" prefWidth="68.0" text="Sıra No" textFill="WHITE" />
@@ -212,15 +212,19 @@
                 <Label font="$x1" layoutX="752.0" layoutY="293.0" prefWidth="68.0" text="Hata Tipi" textFill="WHITE" />
                 <Label font="$x1" layoutX="870.0" layoutY="293.0" prefWidth="92.0" text="Hatanın Yeri" textFill="WHITE" />
                 <Label font="$x1" layoutX="44.0" layoutY="361.0" prefWidth="68.0" text="Sonuç" textFill="WHITE" />
-                <TextField layoutX="626.0" layoutY="321.0" prefWidth="92.0" />
-                <TextField layoutX="112.0" layoutY="321.0" prefWidth="92.0" />
-                <TextField layoutX="752.0" layoutY="321.0" prefWidth="92.0" />
-                <TextField layoutX="499.0" layoutY="321.0" prefWidth="92.00009999999747" />
-                <TextField layoutX="244.0" layoutY="321.0" prefWidth="92.0" />
-                <TextField layoutX="51.0" layoutY="321.0" prefWidth="27.0" />
-                <TextField layoutX="370.0" layoutY="321.0" prefWidth="92.0" />
-                <TextField layoutX="870.0" layoutY="321.0" prefWidth="92.0" />
-                <ChoiceBox layoutX="44.0" layoutY="391.0" prefWidth="68.0">
+                <TextField fx:id="RaporCap" layoutX="626.0" layoutY="321.0" prefWidth="92.0" />
+                <TextField fx:id="RaporKaynakParcaNo" layoutX="112.0" layoutY="321.0" prefWidth="92.0" />
+                <TextField fx:id="RaporHataTipi" layoutX="752.0" layoutY="321.0" prefWidth="92.0" />
+                <TextField fx:id="RaporKalin" layoutX="499.0" layoutY="321.0" prefWidth="92.00009999999747" />
+                <TextField fx:id="RaporKontrolUzn" layoutX="244.0" layoutY="321.0" prefWidth="92.0" />
+                <TextField fx:id="RaporSiraNo" layoutX="51.0" layoutY="321.0" prefWidth="27.0" />
+                <TextField fx:id="RaporKaynakYon" layoutX="370.0" layoutY="321.0" prefWidth="92.0" />
+                <TextField fx:id="RaporHataYeri" layoutX="870.0" layoutY="321.0" prefWidth="92.0" />
+                <Button layoutX="433.0" layoutY="379.0" mnemonicParsing="false" onAction="#newMuayneButtonPushed" prefWidth="100.0" text="Ekle" />
+                <Button layoutX="433.0" layoutY="412.0" mnemonicParsing="false" onAction="#DeleteMuayneButtonPushed" prefWidth="100.0" text="Sil" />
+                <Label font="$x1" layoutX="941.0" layoutY="34.0" text="Sayfa 4" textFill="WHITE" />
+                <Label font="$x2" layoutX="422.0" layoutY="15.0" minHeight="22.0" prefHeight="33.0" prefWidth="166.0" text="Muayne Sonuçları" textFill="WHITE" />
+                <ComboBox fx:id="RaporSonuc" layoutX="44.0" layoutY="391.0" prefHeight="21.0" prefWidth="68.0">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -228,11 +232,7 @@
                       <String fx:value="Item 3" />
                     </FXCollections>
                   </items>
-                </ChoiceBox>
-                <Button layoutX="433.0" layoutY="379.0" mnemonicParsing="false" prefWidth="100.0" text="Ekle" />
-                <Button layoutX="433.0" layoutY="412.0" mnemonicParsing="false" prefWidth="100.0" text="Sil" />
-                <Label font="$x1" layoutX="941.0" layoutY="34.0" text="Sayfa 4" textFill="WHITE" />
-                <Label font="$x2" layoutX="422.0" layoutY="15.0" minHeight="22.0" prefHeight="33.0" prefWidth="166.0" text="Muayne Sonuçları" textFill="WHITE" />
+                </ComboBox>
               </children>
             </AnchorPane>
           </content>
