@@ -711,7 +711,7 @@ public class Controller implements Initializable {
             conn.close();
         } catch (Exception a) {
         }
-    }
+    }//a
 
     public void setGenelbilgilerfromcombobox() {
         try {
