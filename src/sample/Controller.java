@@ -23,6 +23,22 @@ import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
+import com.aspose.cells.SaveFormat;
+import com.aspose.cells.Workbook;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 public class Controller implements Initializable {
     public static int SceneName = 0;
@@ -293,7 +309,7 @@ public class Controller implements Initializable {
     private TextField RaporOnaySeviye;
     @FXML
     private TextField RaporOnayTarih;
-
+    private String TempName;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -550,16 +566,17 @@ public class Controller implements Initializable {
 
 
     }
+
     public void setPersonelBilgileriDegerlendirenFromCombobox() {
         try {
-            char SelectedId,SelectedId2;
+            char SelectedId, SelectedId2;
             String a = (String) RaporDegerlendirenCombobox.getValue();
             SelectedId = a.charAt(0);
             SelectedId2 = a.charAt(1);
             System.out.println(SelectedId);
             String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
             Connection conn = DriverManager.getConnection(myUrl, "root", "root");
-            String query = "SELECT first_name,last_name,is_admin FROM users where id=" + SelectedId+SelectedId2;
+            String query = "SELECT first_name,last_name,is_admin FROM users where id=" + SelectedId + SelectedId2;
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
@@ -575,16 +592,17 @@ public class Controller implements Initializable {
 
         }
     }
+
     public void setPersonelBilgileriOnayFromCombobox() {
         try {
-            char SelectedId,SelectedId2;
+            char SelectedId, SelectedId2;
             String a = (String) RaporOnayCombobox.getValue();
             SelectedId = a.charAt(0);
             SelectedId2 = a.charAt(1);
             System.out.println(SelectedId);
             String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
             Connection conn = DriverManager.getConnection(myUrl, "root", "root");
-            String query = "SELECT first_name,last_name,is_admin FROM users where id=" + SelectedId+SelectedId2;
+            String query = "SELECT first_name,last_name,is_admin FROM users where id=" + SelectedId + SelectedId2;
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
@@ -600,16 +618,17 @@ public class Controller implements Initializable {
 
         }
     }
+
     public void setPersonelBilgileriOperatorFromCombobox() {
         try {
-            char SelectedId,SelectedId2;
+            char SelectedId, SelectedId2;
             String a = (String) RaporOperatorCombobox.getValue();
             SelectedId = a.charAt(0);
             SelectedId2 = a.charAt(1);
             System.out.println(SelectedId);
             String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
             Connection conn = DriverManager.getConnection(myUrl, "root", "root");
-            String query = "SELECT first_name,last_name,is_admin FROM users where id=" + SelectedId+SelectedId2;
+            String query = "SELECT first_name,last_name,is_admin FROM users where id=" + SelectedId + SelectedId2;
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
@@ -628,14 +647,14 @@ public class Controller implements Initializable {
 
     public void setEkipmanBilgileriFromCombobox() {
         try {
-            char SelectedId,SelectedId2;
+            char SelectedId, SelectedId2;
             String a = (String) RaporEkipman.getValue();
             SelectedId = a.charAt(0);
             SelectedId2 = a.charAt(1);
             System.out.println(SelectedId);
             String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
             Connection conn = DriverManager.getConnection(myUrl, "root", "root");
-            String query = "SELECT * FROM cihazlar where id=" + SelectedId+SelectedId2;
+            String query = "SELECT * FROM cihazlar where id=" + SelectedId + SelectedId2;
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
@@ -655,7 +674,8 @@ public class Controller implements Initializable {
         } catch (Exception a) {
         }
     }
-    public void setPersonelBilgileri(){
+
+    public void setPersonelBilgileri() {
         try {
             String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
             Connection conn = DriverManager.getConnection(myUrl, "root", "root");
@@ -664,8 +684,7 @@ public class Controller implements Initializable {
             ResultSet rs = st.executeQuery(query);
             ObservableList<String> a = FXCollections.observableArrayList();
             while (rs.next()) {
-                String cihazName = rs.getInt("id") + " - " + rs.getString("first_name")+" "+rs.getString("last_name");
-
+                String cihazName = rs.getInt("id") + " - " + rs.getString("first_name") + " " + rs.getString("last_name");
 
 
                 a.add(cihazName);
@@ -675,9 +694,10 @@ public class Controller implements Initializable {
             RaporOperatorCombobox.setItems(a);
             RaporDegerlendirenCombobox.setItems(a);
 
+        } catch (Exception e) {
         }
-        catch (Exception e){}
     }
+
     public void setEkipmanBilgileri() {
         try {
             String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
@@ -715,17 +735,18 @@ public class Controller implements Initializable {
 
     public void setGenelbilgilerfromcombobox() {
         try {
-            char SelectedId,SelectedId2;
+            char SelectedId, SelectedId2;
             String a = (String) RaporCustomerName.getValue();
             SelectedId = a.charAt(0);
             SelectedId2 = a.charAt(1);
             System.out.println(SelectedId);
             String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
             Connection conn = DriverManager.getConnection(myUrl, "root", "root");
-            String query = "SELECT * FROM firmalar where id=" + SelectedId+SelectedId2;
+            String query = "SELECT * FROM firmalar where id=" + SelectedId + SelectedId2;
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
+                TempName = rs.getString("firma_name"); //excel basarken proje adı için
                 RaporTestYeri.setText(rs.getString("firma_Ilce") + " " + rs.getString("firma_Il"));
                 RaporIsEmriNo.setText(rs.getString("firma_JobOrderNo"));
                 RaporTeklifNo.setText(rs.getString("firma_OfferNo"));
@@ -1103,6 +1124,15 @@ public class Controller implements Initializable {
         preparedStmt.execute();
         tableViewMuayne.setItems(getMuayneTable());
     }
+    public void DeleteFirstMuayne(int i) throws Exception {
+        String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
+        Connection conn = DriverManager.getConnection(myUrl, "root", "root");
+        String query = "delete from muayne where SiraNo = ?";
+        PreparedStatement preparedStmt = conn.prepareStatement(query);
+        preparedStmt.setInt(1, i);
+        preparedStmt.execute();
+        tableViewMuayne.setItems(getMuayneTable());
+    }
 
     public void DeleteCihazButtonPushed() throws Exception {
         String myUrl = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=Turkey";
@@ -1132,4 +1162,206 @@ public class Controller implements Initializable {
         refreshFirmaTableview();
     }
 
+    @SuppressWarnings({"java:S106", "java:S4823", "java:S1192"})
+    public void ExcelCiktisiButtonPushed() throws Exception {
+
+        InputStream inputStream = this.getClass().getResourceAsStream("FR_02_MT.xlsx");
+        XSSFWorkbook workbook = (XSSFWorkbook) WorkbookFactory.create(inputStream);
+        XSSFSheet sheet = workbook.getSheetAt(0);
+        Row row1 = sheet.getRow(2);//row
+        Cell musteriAdi = row1.getCell(3);//column
+        Cell muayeneProseduru = row1.getCell(19);//column
+        Cell sayfaNo = row1.getCell(26);//column
+        musteriAdi.setCellValue(TempName);
+        muayeneProseduru.setCellValue(RaporMuaynePros.getText());
+        sayfaNo.setCellValue(RaporSayfaNo.getText());
+
+        Row row2 = sheet.getRow(3);//row
+        Cell projeAdi = row2.getCell(3);//column
+        Cell muayeneKapsami = row2.getCell(19);//column
+        Cell raporNo = row2.getCell(26);//column
+        projeAdi.setCellValue(RaporProjeAdi.getText());
+        muayeneKapsami.setCellValue(RaporMuayneKapsam.getText());
+        raporNo.setCellValue(RaporRaporNo.getText());
+
+        Row row3 = sheet.getRow(4);//row
+        Cell testYeri = row3.getCell(3);//column
+        Cell resimNo = row3.getCell(19);//column
+        Cell raporTarihi = row3.getCell(26);//column
+        testYeri.setCellValue(RaporTestYeri.getText());
+        resimNo.setCellValue(RaporResimNo.getText());
+        raporTarihi.setCellValue(RaporRaporTarihi.getText());
+
+        Row row4 = sheet.getRow(5);//row
+        Cell muayeneStandart = row4.getCell(3);//column
+        Cell yuzeyDurumu = row4.getCell(19);//column
+        Cell isEmriNo = row4.getCell(26);//column
+        muayeneStandart.setCellValue(RaporMuayneStand.getText());
+        yuzeyDurumu.setCellValue(RaporYuzeyDurum.getText());
+        isEmriNo.setCellValue(RaporIsEmriNo.getText());
+
+        Row row6 = sheet.getRow(6);//row
+        Cell degerlendirmeStandarti = row6.getCell(3);//column
+        Cell muayeneAsamasi = row6.getCell(19);//column
+        Cell teklifNo = row6.getCell(26);//column
+        degerlendirmeStandarti.setCellValue(RaporDegerlenStand.getText());
+        muayeneAsamasi.setCellValue(RaporMuayneAsama.getText());
+        teklifNo.setCellValue(RaporTeklifNo.getText());
+
+        Row row7 = sheet.getRow(8);//row
+        Cell kutupMesafesi = row7.getCell(4);
+        Cell muayeneBolgesi = row7.getCell(16);
+        Cell yuzeySicakligi = row7.getCell(25);
+        kutupMesafesi.setCellValue(RaporKutupMesafesi.getText());
+        muayeneBolgesi.setCellValue(RaporMuayneBolg.getText());
+        yuzeySicakligi.setCellValue(RaporYuzekSicaklik.getText());
+
+        Row row9 = sheet.getRow(9);//row
+        Cell cihazAdi = row9.getCell(4);
+        Cell akimTipi = row9.getCell(16);
+        Cell muayeneBolgesiAlan = row9.getCell(25);
+        cihazAdi.setCellValue(RaporCihaz.getText());
+        akimTipi.setCellValue((String) RaporAkimTipi.getValue());
+        muayeneBolgesiAlan.setCellValue(RaporMuayneBolg.getText());
+
+        Row row10 = sheet.getRow(10);//row
+        Cell MPTasiyiciOrtam = row10.getCell(4);
+        Cell luxMetre = row10.getCell(16);
+        MPTasiyiciOrtam.setCellValue(RaporMPTasiyici.getText());
+        luxMetre.setCellValue(RaporLuxmetre.getText());
+
+        Row row11 = sheet.getRow(11);//row
+        Cell miknatislamaTeknigi = row11.getCell(4);
+        Cell muayeneOrtami = row11.getCell(16);
+        Cell yuzey = row11.getCell(25);
+        miknatislamaTeknigi.setCellValue(RaporMiknatisTek.getText());
+        muayeneOrtami.setCellValue(RaporMuayneOrt.getText());
+        yuzey.setCellValue(RaporYuzey.getText());
+
+        Row row12 = sheet.getRow(12);//row
+        Cell UVIsikSiddeti = row12.getCell(4);
+        Cell miknatisGiderimi = row12.getCell(16);
+        Cell isikCihazTanimi = row12.getCell(25);
+        UVIsikSiddeti.setCellValue(RaporUVIsik.getText());
+        miknatisGiderimi.setCellValue(RaporMagnetGiderim.getText());
+        isikCihazTanimi.setCellValue(RaporIsikCihazTanim.getText());
+
+
+        Row row13 = sheet.getRow(13);//row
+        Cell isikMesafesi = row13.getCell(4);
+        Cell isilIslem = row13.getCell(16);
+        Cell kaldirmaTesti = row13.getCell(25);
+        isikMesafesi.setCellValue(RaporIsikMesafe.getText());
+        isilIslem.setCellValue(RaporIsilIslem.getText());
+        kaldirmaTesti.setCellValue(RaporKaldirmaTesti.getText());
+
+        Row row19 = sheet.getRow(19);//row
+        Cell standartSapmalar = row19.getCell(7);
+        standartSapmalar.setCellValue(RaporStandartSapma.getText());
+
+        Row row20 = sheet.getRow(20);//row
+        Cell muayeneTarihleri = row20.getCell(7);
+        muayeneTarihleri.setCellValue(RaporMuayneTarih.getText());
+
+        Row row21 = sheet.getRow(21);//row
+        Cell aciklamalarEkler = row21.getCell(7);
+        aciklamalarEkler.setCellValue(Ekler.getText());
+
+
+        Row row39 = sheet.getRow(39);//row
+        Cell operatorIsim = row39.getCell(5);
+        Cell degerlendirenIsim = row39.getCell(15);
+        Cell onayIsim = row39.getCell(20);
+
+        operatorIsim.setCellValue(RaporOperatorName.getText());
+        degerlendirenIsim.setCellValue(RaporDegerlendirenName.getText());
+        onayIsim.setCellValue(RaporOnayName.getText());
+
+        Row row40 = sheet.getRow(40);//row
+        Cell operatorSeviye = row40.getCell(5);
+        Cell degerlendirenSeviye = row40.getCell(15);
+        Cell onaySeviye = row40.getCell(20);
+        operatorSeviye.setCellValue(RaporOperatorSeviye.getText());
+        degerlendirenSeviye.setCellValue(RaporDegerlendirenSeviye.getText());
+        onaySeviye.setCellValue(RaporOnaySeviye.getText());
+
+        int i = 1;
+        while (!getMuayneTable().isEmpty() && i <= 14) {
+            Row rowTable = sheet.getRow(i + 23);
+            Cell sira = rowTable.getCell(0);
+            Cell kaynakParca = rowTable.getCell(1);
+            Cell kontrolUzun = rowTable.getCell(8);
+            Cell kaynakYon = rowTable.getCell(11);
+            Cell kalinlik = rowTable.getCell(17);
+            Cell cap = rowTable.getCell(18);
+            Cell hataTip = rowTable.getCell(22);
+            Cell hataninYeri = rowTable.getCell(24);
+            Cell sonuc = rowTable.getCell(27);
+            sira.setCellValue(i);
+            kaynakParca.setCellValue(getMuayneTable().get(0).getKaynak());
+            kontrolUzun.setCellValue(getMuayneTable().get(0).getKontrolUzn());
+            kaynakYon.setCellValue(getMuayneTable().get(0).getKaynakYon());
+            kalinlik.setCellValue(getMuayneTable().get(0).getKalinlik());
+            cap.setCellValue(getMuayneTable().get(0).getCap());
+            hataTip.setCellValue(getMuayneTable().get(0).getHataTipi());
+            hataninYeri.setCellValue(getMuayneTable().get(0).getHataYeri());
+            sonuc.setCellValue(getMuayneTable().get(0).getSonuc());
+            DeleteFirstMuayne(i);
+            i++;
+        }
+
+
+        Row row41 = sheet.getRow(41);//row
+        Cell operatorTarih = row41.getCell(5);
+        Cell degerlendirenTarih = row41.getCell(15);
+        Cell onayTarih = row41.getCell(20);
+        operatorTarih.setCellValue(RaporOperatorTarih.getText());
+        degerlendirenTarih.setCellValue(RaporDegerlendirenTarih.getText());
+        onayTarih.setCellValue(RaporOnayTarih.getText());
+
+
+        String ExcelName = "C:\\Users\\Firat\\IdeaProjects\\Formprojesi\\src\\sample\\ExcelPrints\\ExcelFile.xlsx";
+        FileOutputStream output = new FileOutputStream(ExcelName);
+        workbook.write(output);
+        output.close();
+
+
+    }
+    public void PDFButtonPushed() throws Exception {
+        try {
+        //Burcu Yıldız'dan Alınmıştır
+
+            String fileexcel = "C:\\Users\\Firat\\IdeaProjects\\Formprojesi\\src\\sample\\ExcelPrints\\ExcelFile.xlsx";
+
+            Workbook workbook = new Workbook(fileexcel);
+
+
+            String filepdf = "C:\\Users\\Firat\\IdeaProjects\\Formprojesi\\src\\sample\\ExcelPrints\\PDFFile.pdf";
+            workbook.save(filepdf, SaveFormat.PDF);
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+
+
 }
+/* ====================================================================
+   Licensed to the Apache Software Foundation (ASF) under one or more
+   contributor license agreements.  See the NOTICE file distributed with
+   this work for additional information regarding copyright ownership.
+   The ASF licenses this file to You under the Apache License, Version 2.0
+   (the "License"); you may not use this file except in compliance with
+   the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+==================================================================== */
+
+
