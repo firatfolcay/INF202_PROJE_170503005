@@ -1337,7 +1337,7 @@ public class Controller implements Initializable {
         //Burcu Yıldız'dan Alınmıştır
             ExcelCiktisiButtonPushed();
 
-            String fileexcel = "C:\\Users\\Firat\\IdeaProjects\\Formprojesi\\src\\sample\\ExcelPrints\\"+RaporKayitAdi.getText()+ "xlsx";
+            String fileexcel = "C:\\Users\\Firat\\IdeaProjects\\Formprojesi\\src\\sample\\ExcelPrints\\"+RaporKayitAdi.getText()+ ".xlsx";
 
 
             Workbook workbook = new Workbook(fileexcel);
