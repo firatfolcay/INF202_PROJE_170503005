@@ -1325,7 +1325,7 @@ public class Controller implements Initializable {
         onayTarih.setCellValue(RaporOnayTarih.getText());
 
 
-        String ExcelName = "C:\\Users\\Firat\\IdeaProjects\\Formprojesi\\src\\sample\\ExcelPrints\\"+RaporKayitAdi.getText()+ "xlsx";
+        String ExcelName = "C:\\Users\\Firat\\IdeaProjects\\Formprojesi\\src\\sample\\ExcelPrints\\"+RaporKayitAdi.getText()+ ".xlsx";
         FileOutputStream output = new FileOutputStream(ExcelName);
         workbook.write(output);
         output.close();
