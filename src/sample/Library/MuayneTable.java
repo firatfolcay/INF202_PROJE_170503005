@@ -1,3 +1,6 @@
+//--------------------------
+//Fırat Fuat Olcay 170503005
+//--------------------------
 package sample.Library;
 import javafx.beans.property.SimpleIntegerProperty;
 
