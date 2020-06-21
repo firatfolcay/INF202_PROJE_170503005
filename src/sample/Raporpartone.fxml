@@ -310,9 +310,12 @@
                 </ImageView>
                 <Label font="$x1" layoutX="941.0" layoutY="34.0" prefWidth="44.9998779296875" text="Sayfa 6" textFill="WHITE" />
                 <Label font="$x2" layoutX="422.0" layoutY="15.0" minHeight="22.0" prefHeight="33.0" prefWidth="166.0" text="Kaydet ve Yükle" textFill="WHITE" />
-                <Button layoutX="421.0" layoutY="148.0" mnemonicParsing="false" onAction="#ExcelCiktisiButtonPushed" prefWidth="135.0" text="Kaydet" />
-                <Button layoutX="421.0" layoutY="187.0" mnemonicParsing="false" onAction="#changeScreenToMainMenu" prefWidth="135.0" text="Ana Menü" />
-                <ProgressBar layoutX="389.0" layoutY="226.0" prefHeight="18.0" prefWidth="200.0" progress="0.0" />
+                <Button layoutX="421.0" layoutY="157.0" mnemonicParsing="false" onAction="#ExcelCiktisiButtonPushed" prefWidth="135.0" text="Kaydet Excel" />
+                <Button layoutX="421.0" layoutY="216.0" mnemonicParsing="false" onAction="#changeScreenToMainMenu" prefWidth="135.0" text="Ana Menü" />
+                <ProgressBar layoutX="389.0" layoutY="255.0" prefHeight="18.0" prefWidth="200.0" progress="0.0" />
+                <Button layoutX="422.0" layoutY="187.0" mnemonicParsing="false" onAction="#PDFButtonPushed" prefWidth="135.0" text="Kaydet Excel &amp; PDF" />
+                <TextField fx:id="RaporKayitAdi" layoutX="422.0" layoutY="117.0" prefWidth="135.0" />
+                <Label layoutX="421.0" layoutY="91.0" text="Dosya Adı" textFill="WHITE" />
               </children>
             </AnchorPane>
           </content>

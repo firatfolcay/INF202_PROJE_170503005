@@ -309,6 +309,8 @@ public class Controller implements Initializable {
     private TextField RaporOnaySeviye;
     @FXML
     private TextField RaporOnayTarih;
+    @FXML
+    private TextField RaporKayitAdi;
     private String TempName;
 
     @Override
@@ -1181,7 +1183,7 @@ public class Controller implements Initializable {
         Cell muayeneKapsami = row2.getCell(19);//column
         Cell raporNo = row2.getCell(26);//column
         projeAdi.setCellValue(RaporProjeAdi.getText());
-        muayeneKapsami.setCellValue(RaporMuayneKapsam.getText());
+        muayeneKapsami.setCellValue(RaporMuayneKapsam.getText()+" %");
         raporNo.setCellValue(RaporRaporNo.getText());
 
         Row row3 = sheet.getRow(4);//row
@@ -1320,7 +1322,7 @@ public class Controller implements Initializable {
         onayTarih.setCellValue(RaporOnayTarih.getText());
 
 
-        String ExcelName = "C:\\Users\\Firat\\IdeaProjects\\Formprojesi\\src\\sample\\ExcelPrints\\ExcelFile.xlsx";
+        String ExcelName = "C:\\Users\\Firat\\IdeaProjects\\Formprojesi\\src\\sample\\ExcelPrints\\"+RaporKayitAdi.getText()+ "xlsx";
         FileOutputStream output = new FileOutputStream(ExcelName);
         workbook.write(output);
         output.close();
@@ -1330,13 +1332,15 @@ public class Controller implements Initializable {
     public void PDFButtonPushed() throws Exception {
         try {
         //Burcu Yıldız'dan Alınmıştır
+            ExcelCiktisiButtonPushed();
 
-            String fileexcel = "C:\\Users\\Firat\\IdeaProjects\\Formprojesi\\src\\sample\\ExcelPrints\\ExcelFile.xlsx";
+            String fileexcel = "C:\\Users\\Firat\\IdeaProjects\\Formprojesi\\src\\sample\\ExcelPrints\\"+RaporKayitAdi.getText()+ "xlsx";
+
 
             Workbook workbook = new Workbook(fileexcel);
 
 
-            String filepdf = "C:\\Users\\Firat\\IdeaProjects\\Formprojesi\\src\\sample\\ExcelPrints\\PDFFile.pdf";
+            String filepdf = "C:\\Users\\Firat\\IdeaProjects\\Formprojesi\\src\\sample\\ExcelPrints\\"+RaporKayitAdi.getText()+".pdf";
             workbook.save(filepdf, SaveFormat.PDF);
 
         } catch (Exception e) {
